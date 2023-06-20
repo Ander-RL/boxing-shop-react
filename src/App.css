@@ -1,38 +1,195 @@
-.App {
+body {
+  background-color: #000000;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  font-size: medium;
+}
+
+p {
+  text-align: justify;
+}
+
+.navbar-brand {
+  font-family: 'Lobster', cursive;
+}
+
+.nav-item {
+    font-weight: 600;
+    font-size: 1.15rem;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.nav-item:hover {
+    background-color: rgba(120, 120, 120, 0.14);
+    border-radius: 8%;
+}
+
+#carouselIntroSlides {
+  height: 100vh;
+}
+
+#carousel-innerIntro {
+  height: 100%;
+}
+
+#carousel-innerIntro img {
+  height: 100%;
+}
+
+.card-title {
+    font-weight: 600;
+}
+
+.card-body a {
+    font-weight: 620;
+}
+
+#footer {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.footerContentCol {
+    text-align: left;
+    margin: 0px 20px;
+    width: 200px;
+    text-decoration: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.footerContentCol h3 {
+    font-weight: 700;
+}
+
+.footerContentCol a {
+  text-decoration: none;
+  color: grey;
+}
+
+
+/*Mobile version*/
+/* Portrait and Landscape */
+@media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (-webkit-min-device-pixel-ratio: 2) {
+
+  #carouselIntroSlides {
+      height: 100%;
+  }
+
+  #about {
+      height: 100%;
+  }
+
+  .itemBanner {
+      text-align: left;
+      padding-right: 8%;
+      padding-left: 8%;
+      padding-bottom: 8%;
+      padding-top: 8%;
+      text-align: center;
+      width: fit-content;
+      font-weight: bolder;
+  }
+
+  .itemBannerText {
+      text-align: left;
+      padding-left: 7%;
+      padding-right: 7%;
+  }
+
+  #shoppingItem {
+      width: 85%;
+  }
+
+}
+
+/* Portrait */
+@media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+
+  #carouselIntroSlides {
+      height: 100%;
+  }
+
+  #about {
+      height: 100%;
+  }
+
+  .itemBanner {
+      text-align: left;
+      padding-right: 8%;
+      padding-left: 8%;
+      padding-bottom: 8%;
+      padding-top: 8%;
+      text-align: center;
+      width: fit-content;
+      font-weight: bolder;
+  }
+
+  .itemBannerText {
+      text-align: left;
+      padding-left: 7%;
+      padding-right: 7%;
+  }
+
+  #punchingBag {
+      width: 85%;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
+/* Portrait iPad*/
+@media only screen and (min-device-width: 568px) and (max-device-width: 1080px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  #carouselIntroSlides {
+      height: 100%;
   }
-  to {
-    transform: rotate(360deg);
+
+  #about {
+      height: 100%;
+  }
+
+  .itemBannerText {
+      text-align: left;
+      padding-left: 7%;
+      padding-right: 7%;
+  }
+
+  .itemBannerText h4 {
+      font-size: 150%;
+  }
+
+  #shoppingItem {
+      width: 200px;
+  }
+}
+
+/* Landscape */
+@media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape) {
+
+  #carouselIntroSlides {
+      height: 100%;
+  }
+
+  #about {
+      height: 100%;
+  }
+
+  .itemBanner {
+      text-align: left;
+      padding-right: 8%;
+      padding-left: 8%;
+      padding-bottom: 8%;
+      padding-top: 8%;
+      text-align: center;
+      width: fit-content;
+      font-weight: bolder;
+  }
+
+  .itemBannerText {
+      text-align: left;
+      padding-left: 7%;
+      padding-right: 7%;
+  }
+
+  #punchingBag {
+      width: 85%;
   }
 }
