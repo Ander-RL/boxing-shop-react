@@ -1,103 +1,31 @@
 import './App.css';
 
-import BoxingGirlImg from "./img/BoxingGirlBags.jpg";
-import BoxingBoysImg from "./img/BoxingBoys2.jpg";
-import BoxingGlovesImg from "./img/Gloves.jpg";
-import ContrastImg from "./img/Contrast.jpg";
-import KickGirlImg from "./img/KickGirl.jpg";
-import StretchingImg from "./img/Stretching.jpg";
-import PunchingBagImg from "./img/HookBag.jpg";
-import TrainingPadsImg from "./img/Pads.png";
-import HeadGuardImg from "./img/Headguard.jpg";
-import Vandages from "./img/Vandages.jpg";
-import MouthPiecesImg from "./img/Mouthpiece.jpg";
+import BoxingGlovesImg from "./assets/img/Gloves.jpg";
+import PunchingBagImg from "./assets/img/HookBag.jpg";
+import TrainingPadsImg from "./assets/img/Pads.png";
+import HeadGuardImg from "./assets/img/Headguard.jpg";
+import Vandages from "./assets/img/Vandages.jpg";
+import MouthPiecesImg from "./assets/img/Mouthpiece.jpg";
+
+import Navbar from './components/Toolbar/Navbar';
+import Container from './components/UI/Container';
+import Carousel from './components/Carousel/Carousel';
+
 
 function App() {
   return (
     <div>
-      <nav class="navbar navbar-expand-lg sticky-top navbar-light bg-light">
+      <Navbar />
 
-        <div class="container-fluid">
+      <Container type="fluid" style="p-0" id="intro">
+        <Carousel />
+      </Container>
 
-          <a class="navbar-brand text-black" href="#">PLUS ULTRA</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link text-black" aria-current="page" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-black" href="#">Shop</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-black" href="#">My Account</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-black" href="#">Shopping Cart&nbsp;&nbsp;<i class="bi bi-cart-fill"></i></a>
-              </li>
-            </ul>
-          </div>
-
-        </div>
-      </nav>
-
-      <div class="container-fluid p-0" id="intro">
-
-        <div id="carouselIntroSlides" class="carousel slide" data-bs-ride="carousel" data-pause="hover">
-          <div class="carousel-inner" id="carousel-innerIntro">
-
-            <div class="carousel-item active">
-              <img src={BoxingGirlImg} class="d-block w-100" alt="BoxingGirlImg" />
-            </div>
-            <div class="carousel-item">
-              <img src={BoxingBoysImg} class="d-block w-100" alt="BoxingBoysImg" />
-            </div>
-            <div class="carousel-item">
-              <img src={ContrastImg} class="d-block w-100" alt="ContrastImg" />
-            </div>
-            <div class="carousel-item">
-              <img src={KickGirlImg} class="d-block w-100" alt="KickGirlImg" />
-            </div>
-            <div class="carousel-item">
-              <img src={StretchingImg} class="d-block w-100" alt="StretchingImg" />
-            </div>
-
-          </div>
-
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselIntroSlides" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselIntroSlides" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
-
-
-          <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselIntroSlides" data-bs-slide-to="0" class="active"
-              aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselIntroSlides" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselIntroSlides" data-bs-slide-to="2" aria-label="Slide 3"></button>
-            <button type="button" data-bs-target="#carouselIntroSlides" data-bs-slide-to="3" aria-label="Slide 4"></button>
-            <button type="button" data-bs-target="#carouselIntroSlides" data-bs-slide-to="4" aria-label="Slide 5"></button>
-          </div>
-
-        </div>
-      </div>
-
-
-
-      <div class="container-fluid p-4 pb-0" id="about">
-
+      <Container type="fluid" style="p-4 pb-0" id="about">
         <div class="row">
 
           <div class="cardColum col-lg-3 col-md-4 d-flex align-items-center justify-content-center align-items-stretch">
-            <div class="card text-bg-light mb-4 shadow p-3 bg-white rounded" style={{maxWidth: '30rem'}}>
+            <div class="card text-bg-light mb-4 shadow p-3 bg-white rounded" style={{ maxWidth: '30rem' }}>
               <img src={PunchingBagImg} class="card-img-top" alt="Punching bag" />
               <div class="card-body d-flex flex-column">
                 <h5 class="card-title">PUNCHING BAGS</h5>
@@ -110,7 +38,7 @@ function App() {
           </div>
 
           <div class="cardColum col-lg-3 col-md-4 d-flex align-items-center justify-content-center align-items-stretch">
-            <div class="card text-bg-light mb-4 shadow p-3 bg-white rounded" style={{maxWidth: '30rem'}}>
+            <div class="card text-bg-light mb-4 shadow p-3 bg-white rounded" style={{ maxWidth: '30rem' }}>
               <img src={BoxingGlovesImg} class="card-img-top" alt="Gloves" />
               <div class="card-body d-flex flex-column">
                 <h5 class="card-title">BOXING GLOVES</h5>
@@ -123,7 +51,7 @@ function App() {
           </div>
 
           <div class="cardColum col-lg-3 col-md-4 d-flex align-items-center justify-content-center align-items-stretch">
-            <div class="card text-bg-light mb-4 shadow p-3 bg-white rounded" style={{maxWidth: '30rem'}}>
+            <div class="card text-bg-light mb-4 shadow p-3 bg-white rounded" style={{ maxWidth: '30rem' }}>
               <img src={TrainingPadsImg} class="card-img-top" alt="Pads" />
               <div class="card-body d-flex flex-column">
                 <h5 class="card-title">TRAINING PADS</h5>
@@ -136,7 +64,7 @@ function App() {
           </div>
 
           <div class="cardColum col-lg-3 col-md-4 d-flex align-items-center justify-content-center align-items-stretch">
-            <div class="card text-bg-light mb-4 shadow p-3 bg-white rounded" style={{maxWidth: '30rem'}}>
+            <div class="card text-bg-light mb-4 shadow p-3 bg-white rounded" style={{ maxWidth: '30rem' }}>
               <img src={HeadGuardImg} class="card-img-top" alt="Headguard" />
               <div class="card-body d-flex flex-column">
                 <h5 class="card-title">HEADGUARDS</h5>
@@ -149,7 +77,7 @@ function App() {
           </div>
 
           <div class="cardColum col-lg-3 col-md-4 d-flex align-items-center justify-content-center align-items-stretch">
-            <div class="card text-bg-light mb-4 shadow p-3 bg-white rounded" style={{maxWidth: '30rem'}}>
+            <div class="card text-bg-light mb-4 shadow p-3 bg-white rounded" style={{ maxWidth: '30rem' }}>
               <img src={Vandages} class="card-img-top" alt="Vandages" />
               <div class="card-body d-flex flex-column">
                 <h5 class="card-title">VANDAGES</h5>
@@ -162,7 +90,7 @@ function App() {
           </div>
 
           <div class="cardColum col-lg-3 col-md-4 d-flex align-items-center justify-content-center align-items-stretch">
-            <div class="card text-bg-light mb-4 shadow p-3 bg-white rounded" style={{maxWidth: '30rem'}}>
+            <div class="card text-bg-light mb-4 shadow p-3 bg-white rounded" style={{ maxWidth: '30rem' }}>
               <img src={MouthPiecesImg} class="card-img-top" alt="Mouthpieces" />
               <div class="card-body d-flex flex-column">
                 <h5 class="card-title">MOUTHPIECES</h5>
@@ -174,11 +102,10 @@ function App() {
           </div>
 
         </div>
-      </div>
+      </Container>
 
 
-      <div class="container-fluid bg-light p-5" id="footer">
-
+      <Container type="fluid" style="bg-light p-5" id="footer">
         <div class="row">
 
           <div class="col-lg col-md-12">
@@ -252,8 +179,7 @@ function App() {
           </div>
 
         </div>
-
-      </div>
+      </Container>
 
     </div>
 
