@@ -10,7 +10,6 @@ import HeadGuardImg from "../assets/img/Headguard.jpg";
 import Vandages from "../assets/img/Vandages.jpg";
 import MouthPiecesImg from "../assets/img/Mouthpiece.jpg";
 import Header from "../components/Layout/Header/Header";
-import { Link } from "react-router-dom";
 
 const MainPage = () => {
   return (

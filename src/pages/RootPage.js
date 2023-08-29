@@ -9,7 +9,7 @@ function RootPage() {
         <Fragment>
 
             <Navbar />
-        
+
             <Outlet />
 
             <Footer />

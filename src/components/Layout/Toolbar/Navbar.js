@@ -1,6 +1,7 @@
 import React from "react";
 import Container from "../../UI/Container";
 import { Link } from "react-router-dom";
+import CartOffCanvas from "../../OffCanvas/CartOffCanvas";
 
 const Navbar = () => {
     return (
@@ -27,7 +28,7 @@ const Navbar = () => {
                                 <a class="nav-link text-black" href="#">My Account</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-black" href="#">Shopping Cart&nbsp;&nbsp;<i class="bi bi-cart-fill"></i></a>
+                                <a class="nav-link text-black" href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart">Shopping Cart&nbsp;&nbsp;<i class="bi bi-cart-fill"></i></a>
                             </li>
                         </ul>
                     </div>
@@ -35,6 +36,12 @@ const Navbar = () => {
                 </Container>
 
             </nav>
+
+            <CartOffCanvas
+                id="offcanvasCart"
+                title="Shopping Cart"
+            />
+
         </React.Fragment>
     );
 };
