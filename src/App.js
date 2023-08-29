@@ -4,14 +4,14 @@ import './App.css';
 
 import RootPage from './pages/RootPage';
 import PruebaPage from './pages/PruebaPage';
-import MainPage from './pages/MainPage';
+import HomePage from './pages/HomePage';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <RootPage />,
     children: [
-      { path: '/', element: <MainPage /> },
+      { path: '/', element: <HomePage /> },
       { path: '/prueba', element: <PruebaPage /> }
     ]
   }

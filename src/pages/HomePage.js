@@ -11,7 +11,7 @@ import Vandages from "../assets/img/Vandages.jpg";
 import MouthPiecesImg from "../assets/img/Mouthpiece.jpg";
 import Header from "../components/Layout/Header/Header";
 
-const MainPage = () => {
+const HomePage = () => {
   return (
     <Fragment>
       
@@ -86,4 +86,4 @@ const MainPage = () => {
   );
 };
 
-export default MainPage;
+export default HomePage;
