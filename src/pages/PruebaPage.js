@@ -1,9 +1,19 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { cartActions } from "../store/cart-slice";
+import Cart from "../components/Cart/Cart";
 
 const PruebaPage = () => {
   const dispatch = useDispatch();
+  const cartItems = useSelector(state => state.cart.items); // listen to any changes in the cart
+
+  useEffect(() => {
+    console.log("[LOG][PruebaPage] useEffect");
+    if (cartItems != null) {
+      console.log(cartItems);
+    };
+  }, [cartItems, dispatch]);
 
   const productPlaceHolder = {
     id: 1,
@@ -17,13 +27,13 @@ const PruebaPage = () => {
   const addToCartHandler = () => {
     console.log("[LOG] addToCartHandler");
     console.log("[LOG] cartItem: ", productPlaceHolder);
-    dispatch(cartActions.addItemToCart({ 
+    dispatch(cartActions.addItemToCart({
       id: id,
       price: price,
       quantity: 1,
       totalPrice: price,
       name: title
-     }));
+    }));
   };
 
   return (
@@ -39,6 +49,35 @@ const PruebaPage = () => {
           </button>
         </div>
       </div>
+
+      <div>
+        <h2>Your Shopping Cart</h2>
+        <ul>
+          {cartItems.map(cartItem =>
+
+            <li key={cartItem.id}>
+              <header>
+                <h3>{cartItem.name}</h3>
+                <div>
+                  ${cartItem.totalPrice.toFixed(2)}{' '}
+                  <span >(${cartItem.price.toFixed(2)})</span>
+                </div>
+              </header>
+              <div>
+                <div>
+                  x <span>{cartItem.quantity}</span>
+                </div>
+                <div>
+                  <button>-</button>
+                  <button>+</button>
+                </div>
+              </div>
+            </li>
+          )
+          }
+        </ul>
+      </div>
+
     </Fragment>
   );
 };
