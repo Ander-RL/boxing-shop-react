@@ -1,4 +1,5 @@
 import React from "react";
+import Cart from "../Cart/Cart";
 
 const CartOffCanvas = (props) => {
     return (
@@ -8,6 +9,7 @@ const CartOffCanvas = (props) => {
                     <h5 class="offcanvas-title" id="offcanvasLabel">{props.title}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
+                <Cart />
                 <div class="offcanvas-body">
                     <div>
                         Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.

@@ -1,7 +1,9 @@
 import React, { Fragment } from "react";
+import { useDispatch } from 'react-redux';
 import { cartActions } from "../store/cart-slice";
 
 const PruebaPage = () => {
+  const dispatch = useDispatch();
 
   const productPlaceHolder = {
     id: 1,
@@ -13,7 +15,15 @@ const PruebaPage = () => {
   const { id, title, price, description } = productPlaceHolder;
 
   const addToCartHandler = () => {
-    dispatch(cartActions.addItemToCart({ id: id, title: title, price: price }));
+    console.log("[LOG] addToCartHandler");
+    console.log("[LOG] cartItem: ", productPlaceHolder);
+    dispatch(cartActions.addItemToCart({ 
+      id: id,
+      price: price,
+      quantity: 1,
+      totalPrice: price,
+      name: title
+     }));
   };
 
   return (
