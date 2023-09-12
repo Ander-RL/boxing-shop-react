@@ -1,33 +1,22 @@
 import { useSelector } from 'react-redux';
+import CartItem from './CartItem';
 
 const Cart = (props) => {
   const cartItems = useSelector(state => state.cart.items); // listen to any changes in the cart
 
   return (
     <div>
-      <ul>
         {cartItems.map(cartItem =>
-          <li key={cartItem.id}>
-            <header>
-              <h3>{cartItem.name}</h3>
-              <div>
-                ${cartItem.totalPrice}{' '}
-                <span >(${cartItem.price})</span>
-              </div>
-            </header>
-            <div>
-              <div>
-                x <span>{cartItem.quantity}</span>
-              </div>
-              <div>
-                <button>-</button>
-                <button>+</button>
-              </div>
-            </div>
-          </li>
+            <CartItem 
+            name={cartItem.name} 
+            description={cartItem.description}
+            quantity={cartItem.quantity}
+            price={cartItem.price}
+            totalPrice={cartItem.totalPrice}
+            img={cartItem.img}
+            />
         )
         }
-      </ul>
     </div>
   );
 };

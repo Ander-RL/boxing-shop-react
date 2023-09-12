@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 
 import Container from "../components/UI/Container";
 import ProductCard from "../components/Card/ProductCard";
+import BoxingGlovesImg from "../assets/img/Gloves.jpg";
 
 const ShopPage = () => {
 
@@ -11,7 +12,7 @@ const ShopPage = () => {
     items.push(
       <ProductCard
         id={i}
-        img=""
+        img={BoxingGlovesImg}
         title={`Product ${i}`}
         description={`Description ${i}`}
         price="20"
