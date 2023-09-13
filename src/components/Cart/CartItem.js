@@ -1,6 +1,29 @@
 import React from "react";
+import { useDispatch } from 'react-redux';
+
+import { cartActions } from "../../store/cart-slice";
 
 const CartItem = (props) => {
+    const dispatch = useDispatch();
+
+    const { id, title, price, img, description } = props;
+
+    const addToCartHandler = () => {
+        dispatch(cartActions.addItemToCart({
+            id: id,
+            price: Number(price),
+            quantity: 1,
+            totalPrice: Number(price),
+            name: title,
+            img: img,
+            description: description
+        }));
+    };
+
+    const removeFromCartHandler = () => {
+        dispatch(cartActions.removeItemFromCart(id));
+    };
+
     return (
         <div class="row mb-1">
             <div class="col-sm-12">
@@ -26,9 +49,9 @@ const CartItem = (props) => {
                             <div class="row mt-2">
                                 <div class="col-sm-6 mt-auto">
                                     <div class="btn-group btn-group-sm" role="group" aria-label="Add Remove">
-                                        <button type="button" class="btn btn-dark">+1</button>
+                                        <button type="button" class="btn btn-dark" onClick={addToCartHandler} >+1</button>
                                         <button type="button" class="btn btn-outline-dark">{props.quantity}</button>
-                                        <button type="button" class="btn btn-dark">-1</button>
+                                        <button type="button" class="btn btn-dark" onClick={removeFromCartHandler} >-1</button>
                                     </div>
                                 </div>
                             </div>
