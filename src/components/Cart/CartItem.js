@@ -4,9 +4,9 @@ const CartItem = (props) => {
     return (
         <div class="row mb-1">
             <div class="col-sm-12">
-                <div class="card text-bg-light shadow p-0 bg-white rounded">
+                <div class="card text-bg-light shadow p-0 bg-white rounded"  style={{ maxHeight: '18rem' }}>
                     <div class="row card-body">
-                        <div class="col-sm-6">
+                        <div class="col-sm-6" style={{ maxWidth: '50%' }}>
                             <div class="row">
                                 <h5 class="card-title">{props.name}</h5>
                                 <p class="card-text">{props.description}</p>
@@ -23,7 +23,7 @@ const CartItem = (props) => {
                             </div>
                             </div>
                         </div>
-                        <img class="col-sm-6" src={props.img} alt="sans" />
+                        <img class="col-sm-6" src={props.img} alt="sans" style={{ maxWidth: '50%' }}/>
                     </div>
                 </div>
             </div>
