@@ -29,6 +29,12 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
+### `firebase deploy`
+
+Deploys builded version of the app.\
+You can visit the app at:\
+https://boxing-shop-react.web.app/
+
 ### `npm run eject`
 
 **Note: this is a one-way operation. Once you `eject`, you can't go back!**
