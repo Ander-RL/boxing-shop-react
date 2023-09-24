@@ -23,37 +23,40 @@ const ShopPage = () => {
   const filterOnClickHandler = (filter) => {
     const filterId = filter.target.attributes.id.nodeValue;
     const currentButtonClasss = document.getElementById(filterId);
-
-    console.log(currentButtonClasss);
+    const fillterAllButtonClass = document.getElementById("filterAll");
 
     switch (filterId) {
       case "filterAll":
-        console.log(filterId);
+        toggleFilterDisableRemaining(filterId);
+        toggleFilter(currentButtonClasss);
         break;
       case "filterPunchingBags":
-        if (currentButtonClasss.classList.contains('text-muted')) {
-          currentButtonClasss.classList.remove("text-muted");
-        } else {
-          currentButtonClasss.classList.add("text-muted");
-        };
+        toggleFilterAll(fillterAllButtonClass);
+        toggleFilter(currentButtonClasss);
         break;
       case "filterGloves":
-        console.log(filterId);
+        toggleFilterAll(fillterAllButtonClass);
+        toggleFilter(currentButtonClasss);
         break;
       case "filterPads":
-        console.log(filterId);
+        toggleFilterAll(fillterAllButtonClass);
+        toggleFilter(currentButtonClasss);
         break;
       case "filterHeadguards":
-        console.log(filterId);
+        toggleFilterAll(fillterAllButtonClass);
+        toggleFilter(currentButtonClasss);
         break;
       case "filterVandages":
-        console.log(filterId);
+        toggleFilterAll(fillterAllButtonClass);
+        toggleFilter(currentButtonClasss);
         break;
       case "filterMouthPieces":
-        console.log(filterId);
+        toggleFilterAll(fillterAllButtonClass);
+        toggleFilter(currentButtonClasss);
         break;
       default:
-        console.log("filterAll");
+        toggleFilterDisableRemaining(filterId);
+        toggleFilter(currentButtonClasss);
         break;
     };
   };
@@ -120,3 +123,34 @@ const ShopPage = () => {
 };
 
 export default ShopPage;
+
+function toggleFilter(currentButtonClass) {
+  if (currentButtonClass.classList.contains('text-muted')) {
+    currentButtonClass.classList.remove("text-muted");
+  } else {
+    currentButtonClass.classList.add("text-muted");
+  };
+}
+
+function toggleFilterAll(filterButtonClass) {
+  if (filterButtonClass.classList.contains('text-muted')) {
+    filterButtonClass.classList.remove("text-muted");
+  } else {
+    filterButtonClass.classList.add("text-muted");
+  };
+}
+
+function toggleFilterDisableRemaining(currentFilter) {
+  const filterList = ["filterAll", "filterPunchingBags", "filterGloves", "filterPads", "filterHeadguards", "filterVandages", "filterMouthPieces"];
+
+  filterList.forEach((filter) => {
+    if(filter !== currentFilter) {
+      const filterButtonClass = document.getElementById(filter);
+      if (!filterButtonClass.classList.contains('text-muted')) {
+        filterButtonClass.classList.add("text-muted");
+      };
+    };
+  });
+
+
+}
