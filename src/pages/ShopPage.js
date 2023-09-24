@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 
 import Container from "../components/UI/Container";
 import ProductCard from "../components/Card/ProductCard";
@@ -6,13 +6,12 @@ import BoxingGlovesImg from "../assets/img/Gloves.jpg";
 
 const ShopPage = () => {
 
-  const [showModal, setShowModal] = useState(false);
-
   const items = [];
 
   for (let i = 0; i < 23; i++) {
     items.push(
       <ProductCard
+        key={i}
         id={i}
         img={BoxingGlovesImg}
         title={`Product ${i}`}
@@ -25,49 +24,48 @@ const ShopPage = () => {
   function modalFilter() {
     return (
       <div className="row p-2">
-        <ul class="nav flex-column flex-sm-row justify-content-center">
-          <li class="nav-item">
+        <ul className="nav flex-column justify-content-center">
+          <li className="nav-item" key="1">
             <button
               id="filterPunchingBags"
-              class="nav-link active text-muted"
-              aria-current="page"
+              className="nav-link active text-muted"
               onClick={filterOnClickHandler}>Punchin Bags</button>
           </li>
-          <li class="nav-item">
+          <li className="nav-item" key="2">
             <button
               id="filterGloves"
-              class="nav-link active text-muted"
+              className="nav-link active text-muted"
               onClick={filterOnClickHandler}>Boxing Gloves</button>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" key="3">
             <button
               id="filterPads"
-              class="nav-link active text-muted"
+              className="nav-link active text-muted"
               onClick={filterOnClickHandler}>Training Pads</button>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" key="4">
             <button
               id="filterHeadguards"
               class="nav-link active text-muted"
               onClick={filterOnClickHandler}>Headguards</button>
           </li>
-          <li class="nav-item">
+          <li className="nav-item" key="5">
             <button
               id="filterVandages"
-              class="nav-link active text-muted"
+              className="nav-link active text-muted"
               onClick={filterOnClickHandler}>Vandages</button>
           </li>
-          <li class="nav-item">
+          <li className="nav-item" key="6">
             <button
               id="filterMouthPieces"
-              class="nav-link active text-muted"
+              className="nav-link active text-muted"
               onClick={filterOnClickHandler}>Mouthpieces</button>
           </li>
-          <li class="nav-item">
+          <li className="nav-item" key="7">
             <button
               id="filterAll"
-              class="nav-link active"
-              tabindex="-1"
+              className="nav-link active"
+              tabIndex="-1"
               onClick={filterOnClickHandler}>All</button>
           </li>
         </ul>
@@ -75,49 +73,43 @@ const ShopPage = () => {
     );
   };
 
-  const filterButtonHandler = () => {
-    console.log(showModal);
-    if (showModal === false) { setShowModal(true); }
-    else { setShowModal(false); };
-  };
-
   const filterOnClickHandler = (filter) => {
     const filterId = filter.target.attributes.id.nodeValue;
-    const currentButtonClasss = document.getElementById(filterId);
+    const currentButtonClass = document.getElementById(filterId);
     const fillterAllButtonClass = document.getElementById("filterAll");
 
     switch (filterId) {
       case "filterAll":
         toggleFilterDisableRemaining(filterId);
-        toggleFilter(currentButtonClasss);
+        toggleFilter(currentButtonClass);
         break;
       case "filterPunchingBags":
         disableFilterAll(fillterAllButtonClass);
-        toggleFilter(currentButtonClasss);
+        toggleFilter(currentButtonClass);
         break;
       case "filterGloves":
         disableFilterAll(fillterAllButtonClass);
-        toggleFilter(currentButtonClasss);
+        toggleFilter(currentButtonClass);
         break;
       case "filterPads":
         disableFilterAll(fillterAllButtonClass);
-        toggleFilter(currentButtonClasss);
+        toggleFilter(currentButtonClass);
         break;
       case "filterHeadguards":
         disableFilterAll(fillterAllButtonClass);
-        toggleFilter(currentButtonClasss);
+        toggleFilter(currentButtonClass);
         break;
       case "filterVandages":
         disableFilterAll(fillterAllButtonClass);
-        toggleFilter(currentButtonClasss);
+        toggleFilter(currentButtonClass);
         break;
       case "filterMouthPieces":
         disableFilterAll(fillterAllButtonClass);
-        toggleFilter(currentButtonClasss);
+        toggleFilter(currentButtonClass);
         break;
       default:
         toggleFilterDisableRemaining(filterId);
-        toggleFilter(currentButtonClasss);
+        toggleFilter(currentButtonClass);
         break;
     };
   };
@@ -131,10 +123,9 @@ const ShopPage = () => {
             <button
               id="showFilter"
               class="btn btn-outline-dark btn"
-              tabindex="-1"
+              tabIndex="-1"
               data-bs-toggle="modal"
-              data-bs-target="#staticBackdrop"
-              onClick={filterButtonHandler}>
+              data-bs-target="#staticBackdrop">
               Filter&nbsp;&nbsp;&nbsp;&nbsp;
               <i class="bi bi-funnel-fill"></i>
             </button>
@@ -145,7 +136,7 @@ const ShopPage = () => {
           <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Filter Products</h5>
+                <h5 class="modal-title" id="staticBackdropLabel">Filter by product</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">

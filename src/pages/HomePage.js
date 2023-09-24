@@ -18,9 +18,9 @@ const HomePage = () => {
       <Header />
 
       <Container type="fluid" style="p-4 pb-0" id="about">
-        <div class="row">
+        <div className="row">
 
-          <div class="cardColum col-lg-3 col-md-4 d-flex align-items-center justify-content-center align-items-stretch">
+          <div className="cardColum col-lg-3 col-md-4 d-flex align-items-center justify-content-center align-items-stretch">
             <ThemeCard
               img={PunchingBagImg}
               imgAlt="Punching bag"
@@ -30,7 +30,7 @@ const HomePage = () => {
             />
           </div>
 
-          <div class="cardColum col-lg-3 col-md-4 d-flex align-items-center justify-content-center align-items-stretch">
+          <div className="cardColum col-lg-3 col-md-4 d-flex align-items-center justify-content-center align-items-stretch">
             <ThemeCard
               img={BoxingGlovesImg}
               imgAlt="Boxing gloves"
@@ -40,7 +40,7 @@ const HomePage = () => {
             />
           </div>
 
-          <div class="cardColum col-lg-3 col-md-4 d-flex align-items-center justify-content-center align-items-stretch">
+          <div className="cardColum col-lg-3 col-md-4 d-flex align-items-center justify-content-center align-items-stretch">
             <ThemeCard
               img={TrainingPadsImg}
               imgAlt="Pads"
@@ -50,7 +50,7 @@ const HomePage = () => {
             />
           </div>
 
-          <div class="cardColum col-lg-3 col-md-4 d-flex align-items-center justify-content-center align-items-stretch">
+          <div className="cardColum col-lg-3 col-md-4 d-flex align-items-center justify-content-center align-items-stretch">
             <ThemeCard
               img={HeadGuardImg}
               imgAlt="Headguard"
@@ -60,7 +60,7 @@ const HomePage = () => {
             />
           </div>
 
-          <div class="cardColum col-lg-3 col-md-4 d-flex align-items-center justify-content-center align-items-stretch">
+          <div className="cardColum col-lg-3 col-md-4 d-flex align-items-center justify-content-center align-items-stretch">
             <ThemeCard
               img={Vandages}
               imgAlt="Vandages"
@@ -70,7 +70,7 @@ const HomePage = () => {
             />
           </div>
 
-          <div class="cardColum col-lg-3 col-md-4 d-flex align-items-center justify-content-center align-items-stretch">
+          <div className="cardColum col-lg-3 col-md-4 d-flex align-items-center justify-content-center align-items-stretch">
             <ThemeCard
               img={MouthPiecesImg}
               imgAlt="Mouthpieces"

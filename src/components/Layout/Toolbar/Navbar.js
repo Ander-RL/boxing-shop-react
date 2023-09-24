@@ -6,30 +6,30 @@ import CartOffCanvas from "../../OffCanvas/CartOffCanvas";
 const Navbar = () => {
     return (
         <React.Fragment>
-            <nav class="navbar navbar-expand-lg sticky-top navbar-light bg-light">
+            <nav className="navbar navbar-expand-lg sticky-top navbar-light bg-light">
 
                 <Container type="fluid" style="" id="navbar">
 
-                    <Link to="/" class="navbar-brand text-black" href="#">PLUS ULTRA</Link>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                    <Link to="/" className="navbar-brand text-black" href="#">PLUS ULTRA</Link>
+                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
+                        <span className="navbar-toggler-icon"></span>
                     </button>
 
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <Link to="/" class="nav-link text-black" aria-current="page" href="#">Home</Link>
+                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul className="navbar-nav mx-auto mb-2 mb-lg-0">
+                            <li className="nav-item">
+                                <Link to="/" className="nav-link text-black" aria-current="page" href="#">Home</Link>
                             </li>
-                            <li class="nav-item">
-                                <Link to="/shop" class="nav-link text-black" href="#">Shop</Link>
+                            <li className="nav-item">
+                                <Link to="/shop" className="nav-link text-black" href="#">Shop</Link>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-black" href="#">My Account</a>
+                            <li className="nav-item">
+                                <a className="nav-link text-black" href="#">My Account</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-black" href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart">My Cart&nbsp;&nbsp;
-                                <i class="bi bi-cart-fill text-black"></i></a>
+                            <li className="nav-item">
+                                <a className="nav-link text-black" href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart">My Cart&nbsp;&nbsp;
+                                <i className="bi bi-cart-fill text-black"></i></a>
                             </li>
                         </ul>
                     </div>
