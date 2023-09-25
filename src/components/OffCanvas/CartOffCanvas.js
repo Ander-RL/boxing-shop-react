@@ -21,7 +21,7 @@ const CartOffCanvas = (props) => {
                 </div>
                 <nav className="navbar navbar-light bg-light">
                     <div className="col-auto me-auto ms-3 fs-5 fw-bold">
-                        Total amount:&nbsp;&nbsp;{totalAmount}
+                        Total amount:&nbsp;&nbsp;{totalAmount}€
                     </div>
                     <div className="col-auto me-3 justify-content-end">
                         <button type="button" className="btn btn-dark" href="#">
