@@ -5,6 +5,7 @@ import Cart from "../Cart/Cart";
 
 const CartOffCanvas = (props) => {
     const cartItems = useSelector(state => state.cart.items);
+    const totalAmount = useSelector(state => state.cart.totalAmount);
 
     return (
         <div>
@@ -18,6 +19,17 @@ const CartOffCanvas = (props) => {
                         {cartItems.length > 0 ? <Cart /> : <p>Your shopping cart is empty</p>}
                     </div>
                 </div>
+                <nav className="navbar navbar-light bg-light">
+                    <div className="col-auto me-auto ms-3 fs-5 fw-bold">
+                        Total amount:&nbsp;&nbsp;{totalAmount}
+                    </div>
+                    <div className="col-auto me-3 justify-content-end">
+                        <button type="button" className="btn btn-dark" href="#">
+                            Checkout&nbsp;&nbsp;
+                            <i className="bi bi-cart-fill text-light"></i>
+                        </button>
+                    </div>
+                </nav>
             </div>
         </div>
     );

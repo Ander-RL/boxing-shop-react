@@ -37,16 +37,16 @@ const ShopPage = () => {
               className="nav-link active text-muted"
               onClick={filterOnClickHandler}>Boxing Gloves</button>
           </li>
-          <li class="nav-item" key="3">
+          <li className="nav-item" key="3">
             <button
               id="filterPads"
               className="nav-link active text-muted"
               onClick={filterOnClickHandler}>Training Pads</button>
           </li>
-          <li class="nav-item" key="4">
+          <li className="nav-item" key="4">
             <button
               id="filterHeadguards"
-              class="nav-link active text-muted"
+              className="nav-link active text-muted"
               onClick={filterOnClickHandler}>Headguards</button>
           </li>
           <li className="nav-item" key="5">
@@ -119,32 +119,32 @@ const ShopPage = () => {
       <Container type="fluid" id="shop">
 
         <div className="row p-2 pt-3 justify-content-end">
-          <div class="col d-flex justify-content-end">
+          <div className="col d-flex justify-content-end">
             <button
               id="showFilter"
-              class="btn btn-outline-dark btn"
+              className="btn btn-outline-dark btn"
               tabIndex="-1"
               data-bs-toggle="modal"
               data-bs-target="#staticBackdrop">
               Filter&nbsp;&nbsp;&nbsp;&nbsp;
-              <i class="bi bi-funnel-fill"></i>
+              <i className="bi bi-funnel-fill"></i>
             </button>
           </div>
         </div>
 
-        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Filter by product</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="staticBackdropLabel">Filter by product</h5>
+                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
-              <div class="modal-body">
+              <div className="modal-body">
                 {modalFilter()}
               </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-dark">Filter</button>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
+                <button type="button" className="btn btn-dark">Filter</button>
               </div>
             </div>
           </div>
