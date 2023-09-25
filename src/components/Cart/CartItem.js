@@ -49,9 +49,9 @@ const CartItem = (props) => {
                             <div className="row mt-2">
                                 <div className="col-sm-6 mt-auto">
                                     <div className="btn-group btn-group-sm" role="group" aria-label="Add Remove">
-                                        <button type="button" className="btn btn-dark" onClick={addToCartHandler} >+1</button>
-                                        <button type="button" className="btn btn-outline-dark">{props.quantity}</button>
                                         <button type="button" className="btn btn-dark" onClick={removeFromCartHandler} >-1</button>
+                                        <button type="button" className="btn btn-outline-dark">{props.quantity}</button>
+                                        <button type="button" className="btn btn-dark" onClick={addToCartHandler} >+1</button>
                                     </div>
                                 </div>
                             </div>
