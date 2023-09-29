@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from 'react-redux';
+import { Link } from "react-router-dom";
 
 import Cart from "../Cart/Cart";
 
@@ -24,10 +25,12 @@ const CartOffCanvas = (props) => {
                         Total amount:&nbsp;&nbsp;{totalAmount}€
                     </div>
                     <div className="col-auto me-3 justify-content-end">
+                    <Link to="/checkout" className="nav-link" href="#">
                         <button type="button" className="btn btn-dark" href="#">
                             Checkout&nbsp;&nbsp;
                             <i className="bi bi-cart-fill text-light"></i>
                         </button>
+                        </Link>
                     </div>
                 </nav>
             </div>
