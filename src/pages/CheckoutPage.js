@@ -34,9 +34,9 @@ const CheckoutPage = () => {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="row g-0">
+                                    <div className="flex-row">
                                         <div className="card-footer">
-                                            <p className="card-text"><small className="text">Items total: </small></p>
+                                            <p className="card-text text-end fw-bolder"><small className="text">Item total: </small></p>
                                         </div>
                                     </div>
                                 </div>
