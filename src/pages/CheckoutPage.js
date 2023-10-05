@@ -12,7 +12,7 @@ const CheckoutPage = () => {
 
                 <div className="d-flex flex-column d-sm-flex flex-sm-row">
                     <div className="col-lg-8 col-md-6">
-                        <div className="card mb-3 me-lg-2">
+                        <div className="card m-1">
                             <div className="row g-0">
                                 <div className="row g-0">
                                     <div className="col-4 col-lg-2">
@@ -21,11 +21,11 @@ const CheckoutPage = () => {
                                     <div className="col-8 col-lg-10">
                                         <div className="card-body">
                                             <div className="d-flex flex-column d-sm-flex flex-sm-row">
-                                                <div className="col-lg-8 col-sm-6">
+                                                <div className="col-lg-8 col-sm-6 me-2">
                                                     <h5 className="card-title">Card title</h5>
                                                     <p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                                                 </div>
-                                                <div className="col-lg-4 col-sm-6">
+                                                <div className="col-lg-4 col-sm-6 me-2">
                                                     <h5 className="card-title">Avaliable</h5>
                                                     <p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                                                 </div>
@@ -39,8 +39,38 @@ const CheckoutPage = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="col-lg-4 col-md-6 bg-primary">
-                        <h1>col2</h1>
+                    <div className="col-lg-4 col-md-6">
+
+                        <div className="d-flex flex-column d-sm-flex flex-sm-row">
+                            <div class="card m-1">
+                                <div class="card-body">
+                                    <h5 class="card-title">Shipping details</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="d-flex flex-column d-sm-flex flex-sm-row">
+                            <div class="card m-1">
+                                <div class="card-body">
+                                    <h5 class="card-title">Payment</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="d-flex flex-column d-sm-flex flex-sm-row">
+                            <div class="card m-1">
+                                <div class="card-body">
+                                    <h5 class="card-title">Helpful links</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </Container>
