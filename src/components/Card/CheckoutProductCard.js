@@ -20,11 +20,13 @@ const CheckoutProductCard = (props) => {
                                         <p className="card-text">{description}</p>
                                     </div>
                                     <div className="col-lg-4 col-sm-6 me-2">
-                                        <h5 className="card-title">In Stock</h5>
-                                        <p className="card-text">Amount&nbsp;&nbsp;
-                                        <button type="button" className="btn btn-outline-dark">
-                                            {quantity}</button>
-                                        </p>
+                                        <h5 className="text-end">In Stock</h5>
+                                        <div className="form-group row justify-content-end">
+                                            <div className="col-xs-3 w-25">
+                                                <label className="text">Amount&nbsp;&nbsp;</label>
+                                                <input className="form-control" type="number" placeholder={quantity} />
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
