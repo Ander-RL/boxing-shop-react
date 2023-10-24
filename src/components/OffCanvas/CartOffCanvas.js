@@ -26,7 +26,7 @@ const CartOffCanvas = (props) => {
                     </div>
                     <div className="col-auto me-3 justify-content-end">
                     <Link to="/checkout" className="nav-link" href="#">
-                        <button type="button" className="btn btn-dark" href="#">
+                        <button type="button" className="btn btn-dark" data-bs-dismiss="offcanvas" href="#">
                             Checkout&nbsp;&nbsp;
                             <i className="bi bi-cart-fill text-light"></i>
                         </button>
