@@ -1,12 +1,13 @@
 import React from "react";
+import { useSelector } from 'react-redux';
 
 import Container from "../components/UI/Container";
-
-import BoxingGlovesImg from "../assets/img/Gloves.jpg";
 import CheckoutProductCard from "../components/Card/CheckoutProductCard";
 
 
 const CheckoutPage = () => {
+    const cartItems = useSelector(state => state.cart.items);
+
     return (
         <React.Fragment>
             <Container type="fluid" id="checkout">
@@ -14,22 +15,17 @@ const CheckoutPage = () => {
                 <div className="d-flex flex-column d-sm-flex flex-sm-row">
                     <div className="col-lg-8 col-md-6">
 
-                        <CheckoutProductCard
-                            title="Product1"
-                            img={BoxingGlovesImg}
-                            quantity="5"
-                            price="30€" 
-                            description="Product description"
-                        />
-
-                        <CheckoutProductCard
-                            title="Product2"
-                            img={BoxingGlovesImg}
-                            price="25€"
-                            quantity="2" 
-                            description="Product description"
-                        />
-
+                        {cartItems.map(cartItem =>
+                            <CheckoutProductCard
+                                id={cartItem.id}
+                                title={cartItem.name}
+                                img={cartItem.img}
+                                quantity={cartItem.quantity}
+                                price={cartItem.price}
+                                totalPrice={cartItem.totalPrice}
+                                description={cartItem.description}
+                            />
+                        )}
                     </div>
 
 
