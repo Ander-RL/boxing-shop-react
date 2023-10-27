@@ -1,25 +1,11 @@
 import React, { Fragment } from "react";
 
 import Container from "../components/UI/Container";
-import ProductCard from "../components/Card/ProductCard";
-import BoxingGlovesImg from "../assets/img/Gloves.jpg";
+import ProductCardList from "../assets/items/ProductCardItems";
 
 const ShopPage = () => {
 
-  const items = [];
-
-  for (let i = 0; i < 23; i++) {
-    items.push(
-      <ProductCard
-        key={i}
-        id={i}
-        img={BoxingGlovesImg}
-        title={`Product ${i}`}
-        description={`Description ${i}`}
-        price="20"
-      />
-    );
-  };
+  const items = ProductCardList;
 
   function modalFilter() {
     return (
