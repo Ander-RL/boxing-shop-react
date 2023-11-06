@@ -1,11 +1,19 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 
 import Container from "../components/UI/Container";
 import ProductCardList from "../assets/items/ProductCardItems";
 
+const filterList = ["filterAll", "filterPunchingBags", "filterGloves", "filterPads", "filterHeadguards", "filterVandages", "filterMouthPieces"];
+//let visibleProducts = [];
+
 const ShopPage = () => {
 
-  const items = ProductCardList;
+  const[items, setItems] = useState(ProductCardList);
+  const[visibleProducts, setVisibleProducts] = useState(ProductCardList);
+
+  useEffect(()=> {
+    setItems(visibleProducts);
+  }, [visibleProducts, items]);
 
   function modalFilter() {
     return (
@@ -60,6 +68,7 @@ const ShopPage = () => {
   };
 
   const filterOnClickHandler = (filter) => {
+    let tempArray = [];
     const filterId = filter.target.attributes.id.nodeValue;
     const currentButtonClass = document.getElementById(filterId);
     const fillterAllButtonClass = document.getElementById("filterAll");
@@ -68,36 +77,49 @@ const ShopPage = () => {
       case "filterAll":
         toggleFilterDisableRemaining(filterId);
         toggleFilter(currentButtonClass);
+        displayFiltered(tempArray, "");
         break;
       case "filterPunchingBags":
         disableFilterAll(fillterAllButtonClass);
         toggleFilter(currentButtonClass);
+        displayFiltered(tempArray, "bag");
         break;
       case "filterGloves":
         disableFilterAll(fillterAllButtonClass);
         toggleFilter(currentButtonClass);
+        displayFiltered(tempArray, "gloves");
         break;
       case "filterPads":
         disableFilterAll(fillterAllButtonClass);
         toggleFilter(currentButtonClass);
+        displayFiltered(tempArray, "pads");
         break;
       case "filterHeadguards":
         disableFilterAll(fillterAllButtonClass);
         toggleFilter(currentButtonClass);
+        displayFiltered(tempArray, "headguard");
         break;
       case "filterVandages":
         disableFilterAll(fillterAllButtonClass);
         toggleFilter(currentButtonClass);
+        displayFiltered(tempArray, "vandages");
         break;
       case "filterMouthPieces":
         disableFilterAll(fillterAllButtonClass);
         toggleFilter(currentButtonClass);
+        displayFiltered(tempArray, "mouth");
         break;
       default:
         toggleFilterDisableRemaining(filterId);
         toggleFilter(currentButtonClass);
+        displayFiltered(tempArray, "");
         break;
     };
+  };
+
+  const displayFiltered = (tempArray, keyword) => {
+    items.forEach(product => product.props.title.toLowerCase().includes(keyword) && tempArray.push(product));
+    setVisibleProducts(tempArray);
   };
 
   return (
@@ -161,7 +183,6 @@ function disableFilterAll(filterButtonClass) {
 }
 
 function toggleFilterDisableRemaining(currentFilter) {
-  const filterList = ["filterAll", "filterPunchingBags", "filterGloves", "filterPads", "filterHeadguards", "filterVandages", "filterMouthPieces"];
 
   filterList.forEach((filter) => {
     if (filter !== currentFilter) {

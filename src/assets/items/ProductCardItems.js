@@ -5,6 +5,7 @@ import HeadGuard from "../img/Headguard.jpg";
 import HookBag from "../img/HookBag.jpg";
 import Vandages from "../img/Vandages.jpg";
 import Pads from "../img/Pads.png";
+import Mouthpiece from "../img/Mouthpiece.jpg";
 
 const ProductCardList = [
     <ProductCard
@@ -109,6 +110,22 @@ const ProductCardList = [
         img={Pads}
         title="Small Hand Pads"
         description="Pads for practicing technic"
+        price="50"
+    />,
+    <ProductCard
+        key="13"
+        id="13"
+        img={Mouthpiece}
+        title="Simple Mouthpiece"
+        description="Simple to adapt mouthpiece"
+        price="50"
+    />,
+    <ProductCard
+        key="14"
+        id="14"
+        img={Mouthpiece}
+        title="Pro Mouthpiece"
+        description="Professional mouthpiece"
         price="50"
     />,
 ];
