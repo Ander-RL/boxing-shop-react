@@ -4,12 +4,13 @@ import Container from "../components/UI/Container";
 import ProductCardList from "../assets/items/ProductCardItems";
 
 const filterList = ["filterAll", "filterPunchingBags", "filterGloves", "filterPads", "filterHeadguards", "filterVandages", "filterMouthPieces"];
-//let visibleProducts = [];
 
 const ShopPage = () => {
 
   const[items, setItems] = useState(ProductCardList);
   const[visibleProducts, setVisibleProducts] = useState(ProductCardList);
+
+  let tempArray = [];
 
   useEffect(()=> {
     setItems(visibleProducts);
@@ -68,7 +69,6 @@ const ShopPage = () => {
   };
 
   const filterOnClickHandler = (filter) => {
-    let tempArray = [];
     const filterId = filter.target.attributes.id.nodeValue;
     const currentButtonClass = document.getElementById(filterId);
     const fillterAllButtonClass = document.getElementById("filterAll");
@@ -77,48 +77,53 @@ const ShopPage = () => {
       case "filterAll":
         toggleFilterDisableRemaining(filterId);
         toggleFilter(currentButtonClass);
-        displayFiltered(tempArray, "");
+        tempArray = ProductCardList;
         break;
       case "filterPunchingBags":
         disableFilterAll(fillterAllButtonClass);
         toggleFilter(currentButtonClass);
-        displayFiltered(tempArray, "bag");
+        storeSelection(tempArray, "bag");
         break;
       case "filterGloves":
         disableFilterAll(fillterAllButtonClass);
         toggleFilter(currentButtonClass);
-        displayFiltered(tempArray, "gloves");
+        storeSelection(tempArray, "gloves");
         break;
       case "filterPads":
         disableFilterAll(fillterAllButtonClass);
         toggleFilter(currentButtonClass);
-        displayFiltered(tempArray, "pads");
+        storeSelection(tempArray, "pads");
         break;
       case "filterHeadguards":
         disableFilterAll(fillterAllButtonClass);
         toggleFilter(currentButtonClass);
-        displayFiltered(tempArray, "headguard");
+        storeSelection(tempArray, "headguard");
         break;
       case "filterVandages":
         disableFilterAll(fillterAllButtonClass);
         toggleFilter(currentButtonClass);
-        displayFiltered(tempArray, "vandages");
+        storeSelection(tempArray, "vandages");
         break;
       case "filterMouthPieces":
         disableFilterAll(fillterAllButtonClass);
         toggleFilter(currentButtonClass);
-        displayFiltered(tempArray, "mouth");
+        storeSelection(tempArray, "mouth");
         break;
       default:
         toggleFilterDisableRemaining(filterId);
         toggleFilter(currentButtonClass);
-        displayFiltered(tempArray, "");
+        tempArray = ProductCardList;
         break;
     };
   };
 
-  const displayFiltered = (tempArray, keyword) => {
-    items.forEach(product => product.props.title.toLowerCase().includes(keyword) && tempArray.push(product));
+  const storeSelection = (tempArray, keyword) => {
+    ProductCardList.forEach(product => product.props.title.toLowerCase().includes(keyword) && tempArray.push(product));
+    console.log(tempArray);
+  };
+
+  const displayFilteredHandler = () => {
+    console.log(tempArray);
     setVisibleProducts(tempArray);
   };
 
@@ -152,7 +157,7 @@ const ShopPage = () => {
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
-                <button type="button" className="btn btn-dark">Filter</button>
+                <button type="button" className="btn btn-dark" onClick={displayFilteredHandler}>Filter</button>
               </div>
             </div>
           </div>
