@@ -7,35 +7,39 @@ import CheckoutProductCard from "../components/Card/CheckoutProductCard";
 
 const CheckoutPage = () => {
 
+    const cartItems = useSelector(state => state.cart.items);
+    const cartTotal = useSelector(state => state.cart.totalAmount);
+
     const [standard, setStandard] = useState(false);
     const [express, setExpress] = useState(true);
-    const [totalAmount, setTotalAmount] = useState(0);
-
-    const cartItems = useSelector(state => state.cart.items);
+    const [totalShipping, setTotalShipping] = useState(10);
+    const [totalCheckout, setTotalCheckout] = useState(cartTotal + totalShipping);
 
     const shippingMethodHandler = (e) => {
         console.log(e.target.id);
 
         const shippingMethod = e.target.id;
 
-        if(shippingMethod === "expressShipping" && express === false) {
+        if (shippingMethod === "expressShipping" && express === false) {
             setExpress(true);
             setStandard(false);
         }
 
-        if(shippingMethod === "standardShipping" && standard === false) {
+        if (shippingMethod === "standardShipping" && standard === false) {
             setExpress(false);
             setStandard(true);
         }
     };
 
     useEffect(() => {
-        if(express){
-            setTotalAmount(10);
+        if (express) {
+            setTotalShipping(10);
         } else {
-            setTotalAmount(2);
+            setTotalShipping(2);
         }
-    }, [standard, express]);
+        setTotalCheckout(cartTotal + totalShipping);
+
+    }, [standard, express, totalShipping, totalCheckout, cartTotal]);
 
     return (
         <React.Fragment>
@@ -79,7 +83,7 @@ const CheckoutPage = () => {
                                             Express shipping
                                         </label>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -89,7 +93,17 @@ const CheckoutPage = () => {
                                 <div className="card-body">
                                     <h5 className="card-title">Payment</h5>
                                     <h6 className="card-subtitle mb-2 text-muted">Here is your order's total amount</h6>
-                                    <p className="card-text">{totalAmount}€</p>
+                                    <div className="card-text">
+                                        Shipping = {totalShipping}€
+                                    </div>
+                                    <div className="card-text">
+                                        Items total = {cartTotal}€
+                                    </div>
+                                </div>
+                                <div className="flex-row">
+                                    <div className="card-footer">
+                                        <p className="card-text text-end fw-bolder"><small className="text">Order total: {totalCheckout}</small></p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
