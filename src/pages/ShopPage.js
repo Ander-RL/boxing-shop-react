@@ -1,5 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
+import { useDispatch, useSelector } from 'react-redux';
 
+import { fetchShopData } from "../store/shop-thunk";
 import Container from "../components/UI/Container";
 import ProductCardList from "../assets/items/ProductCardItems";
 
@@ -7,14 +9,24 @@ const filterList = ["filterAll", "filterPunchingBags", "filterGloves", "filterPa
 
 const ShopPage = () => {
 
-  const[items, setItems] = useState(ProductCardList);
-  const[visibleProducts, setVisibleProducts] = useState(ProductCardList);
+  const dispatch = useDispatch();
+  const [items, setItems] = useState(ProductCardList);
+  const [visibleProducts, setVisibleProducts] = useState(ProductCardList);
+
+  const shopItems = useSelector(state => state.shop.items); // listen to any changes in the shop
 
   let tempArray = [];
 
-  useEffect(()=> {
+  useEffect(() => {
     setItems(visibleProducts);
   }, [visibleProducts, items]);
+
+  // Fetch data from backend
+  // Action Creator way.
+  useEffect(() => {
+    dispatch(fetchShopData());
+    console.log(shopItems);
+  }, [visibleProducts, dispatch]);
 
   function modalFilter() {
     return (
@@ -119,11 +131,11 @@ const ShopPage = () => {
 
   const storeSelection = (tempArray, keyword) => {
     ProductCardList.forEach(product => product.props.title.toLowerCase().includes(keyword) && tempArray.push(product));
-    console.log(tempArray);
+    //console.log(tempArray);
   };
 
   const displayFilteredHandler = () => {
-    console.log(tempArray);
+    //console.log(tempArray);
     setVisibleProducts(tempArray);
   };
 
