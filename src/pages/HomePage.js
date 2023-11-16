@@ -12,6 +12,7 @@ import MouthPiecesImg from "../assets/img/Mouthpiece.jpg";
 import Header from "../components/Layout/Header/Header";
 
 const HomePage = () => {
+
   return (
     <Fragment>
       

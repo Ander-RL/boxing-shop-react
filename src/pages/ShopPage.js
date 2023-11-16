@@ -1,32 +1,64 @@
-import React, { Fragment, useEffect, useState } from "react";
-import { useDispatch, useSelector } from 'react-redux';
+import React, { Fragment, useEffect, useState, useRef } from "react";
+//import { useDispatch, useSelector } from 'react-redux';
 
-import { fetchShopData } from "../store/shop-thunk";
+//import { fetchShopData } from "../store/shop-thunk";
 import Container from "../components/UI/Container";
 import ProductCardList from "../assets/items/ProductCardItems";
+import ProductCard from "../components/Card/ProductCard";
 
 const filterList = ["filterAll", "filterPunchingBags", "filterGloves", "filterPads", "filterHeadguards", "filterVandages", "filterMouthPieces"];
 
 const ShopPage = () => {
 
-  const dispatch = useDispatch();
+  //const dispatch = useDispatch();
   const [items, setItems] = useState(ProductCardList);
-  const [visibleProducts, setVisibleProducts] = useState(ProductCardList);
+  const [visibleProducts, setVisibleProducts] = useState([]);
 
-  const shopItems = useSelector(state => state.shop.items); // listen to any changes in the shop
+  //const shopItems = useSelector(state => state.shop.items); // listen to any changes in the shop
+
+  const renderCount = useRef(0);
+  useEffect(() => {
+    renderCount.current = renderCount.current + 1;
+    console.log("[LOG][Render Count] ", renderCount);
+  });
+
+  const setProductList = (shopItems) => {
+    let list = [];
+    shopItems.forEach(item => list.push(
+      <ProductCard
+        key={item.id}
+        id={item.id}
+        img={`/img/${item.img}`}
+        title={item.name}
+        description={item.description}
+        price={item.price}
+      />
+    ));
+    setVisibleProducts(list);
+  };
+  
+  //setProductList(shopItems);
 
   let tempArray = [];
 
-  useEffect(() => {
-    setItems(visibleProducts);
-  }, [visibleProducts, items]);
+  /*useEffect(() => {
+    //dispatch(fetchShopData());
+  }, [visibleProducts, dispatch]);*/
 
-  // Fetch data from backend
-  // Action Creator way.
   useEffect(() => {
-    dispatch(fetchShopData());
-    console.log(shopItems);
-  }, [visibleProducts, dispatch]);
+    fetch('http://localhost:8080/react/v1/products')
+       .then((res) => res.json())
+       .then((data) => {
+          setProductList(data);
+       })
+       .catch((err) => {
+          console.log(err.message);
+       });
+ }, []);
+
+ useEffect(() => {
+  setItems(visibleProducts);
+}, [visibleProducts]);
 
   function modalFilter() {
     return (
