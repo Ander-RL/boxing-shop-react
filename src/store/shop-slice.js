@@ -8,6 +8,8 @@ const shopSlice = createSlice({
     reducers: {
         getShopItems(state, action) {
             state.items = action.payload;
+            console.log("[LOG][shop-slice] state", state);
+            console.log("[LOG][shop-slice] action", action);
         }
     }
 });

@@ -20,6 +20,8 @@ export const fetchShopData = () => {
             const responseData = await response.json();
 
             dispatch(shopActions.getShopItems(responseData));
+            console.log("[LOG][shop-thunk] dispatch(shopActions.getShopItems(responseData))");
+            console.log("[LOG][shop-thunk] responseData: ", responseData);
         }
 
         await fetchData().catch(error => {
