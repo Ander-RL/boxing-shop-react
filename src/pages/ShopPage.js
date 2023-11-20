@@ -40,6 +40,8 @@ const ShopPage = () => {
   //setProductList(shopItems);
 
   let tempArray = [];
+  let selectedProducts = [];
+  let allProducts = ["gloves", "headguard", "hookbag", "mouthpiece", "pads", "vandages"];
 
   /*useEffect(() => {
     //dispatch(fetchShopData());
@@ -121,54 +123,79 @@ const ShopPage = () => {
       case "filterAll":
         toggleFilterDisableRemaining(filterId);
         toggleFilter(currentButtonClass);
-        tempArray = ProductCardList;
+        //tempArray = ProductCardList;
+        selectedProducts = allProducts;
         break;
       case "filterPunchingBags":
         disableFilterAll(fillterAllButtonClass);
         toggleFilter(currentButtonClass);
-        storeSelection(tempArray, "bag");
+        //storeSelection(tempArray, "bag");
+        storeSelection("bag");
         break;
       case "filterGloves":
         disableFilterAll(fillterAllButtonClass);
         toggleFilter(currentButtonClass);
-        storeSelection(tempArray, "gloves");
+        //storeSelection(tempArray, "gloves");
+        storeSelection("gloves");
         break;
       case "filterPads":
         disableFilterAll(fillterAllButtonClass);
         toggleFilter(currentButtonClass);
-        storeSelection(tempArray, "pads");
+        //storeSelection(tempArray, "pads");
+        storeSelection("pads");
         break;
       case "filterHeadguards":
         disableFilterAll(fillterAllButtonClass);
         toggleFilter(currentButtonClass);
-        storeSelection(tempArray, "headguard");
+        //storeSelection(tempArray, "headguard");
+        storeSelection("headguard");
         break;
       case "filterVandages":
         disableFilterAll(fillterAllButtonClass);
         toggleFilter(currentButtonClass);
-        storeSelection(tempArray, "vandages");
+        //storeSelection(tempArray, "vandages");
+        storeSelection("vandages");
         break;
       case "filterMouthPieces":
         disableFilterAll(fillterAllButtonClass);
         toggleFilter(currentButtonClass);
-        storeSelection(tempArray, "mouth");
+        //storeSelection(tempArray, "mouth");
+        storeSelection("mouthpiece");
         break;
       default:
         toggleFilterDisableRemaining(filterId);
         toggleFilter(currentButtonClass);
-        tempArray = ProductCardList;
+        //tempArray = ProductCardList;
+        selectedProducts = allProducts;
         break;
     };
   };
 
-  const storeSelection = (tempArray, keyword) => {
-    ProductCardList.forEach(product => product.props.title.toLowerCase().includes(keyword) && tempArray.push(product));
-    //console.log(tempArray);
+  const storeSelection = (keyword) => {
+    //ProductCardList.forEach(product => product.props.title.toLowerCase().includes(keyword) && tempArray.push(product));
+    selectedProducts.push(keyword);
   };
 
   const displayFilteredHandler = () => {
-    //console.log(tempArray);
-    setVisibleProducts(tempArray);
+    console.log(JSON.stringify(selectedProducts));
+   fetch('http://localhost:8080/react/v1/products/selectedProducts', 
+   {
+    method: 'POST', 
+    mode: 'cors', 
+    body: JSON.stringify(selectedProducts),
+    headers: {
+      'Accept': 'application/json, text/plain',
+      'Content-Type': 'application/json'
+    }
+  })
+      .then((res) => res.json())
+      .then((data) => {
+         setProductList(data);
+      })
+      .catch((err) => {
+         console.log(err.message);
+      });
+
   };
 
   return (
