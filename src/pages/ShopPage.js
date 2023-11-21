@@ -177,7 +177,8 @@ const ShopPage = () => {
   };
 
   const displayFilteredHandler = () => {
-    console.log(JSON.stringify(selectedProducts));
+   toggleFilterDisableRemaining("filterAll");
+
    fetch('http://localhost:8080/react/v1/products/selectedProducts', 
    {
     method: 'POST', 
@@ -228,7 +229,7 @@ const ShopPage = () => {
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
-                <button type="button" className="btn btn-dark" onClick={displayFilteredHandler}>Filter</button>
+                <button type="button" className="btn btn-dark" onClick={displayFilteredHandler} data-bs-dismiss="modal">Filter</button>
               </div>
             </div>
           </div>
