@@ -1,7 +1,5 @@
 import React, { Fragment, useEffect, useState, useRef } from "react";
-//import { useDispatch, useSelector } from 'react-redux';
 
-//import { fetchShopData } from "../store/shop-thunk";
 import Container from "../components/UI/Container";
 import ProductCardList from "../assets/items/ProductCardItems";
 import ProductCard from "../components/Card/ProductCard";
@@ -10,11 +8,11 @@ const filterList = ["filterAll", "filterPunchingBags", "filterGloves", "filterPa
 
 const ShopPage = () => {
 
-  //const dispatch = useDispatch();
+  let selectedProducts = [];
+  let allProducts = ["gloves", "headguard", "hookbag", "mouthpiece", "pads", "vandages"];
+
   const [items, setItems] = useState(ProductCardList);
   const [visibleProducts, setVisibleProducts] = useState([]);
-
-  //const shopItems = useSelector(state => state.shop.items); // listen to any changes in the shop
 
   const renderCount = useRef(0);
   useEffect(() => {
@@ -36,31 +34,14 @@ const ShopPage = () => {
     ));
     setVisibleProducts(list);
   };
-  
-  //setProductList(shopItems);
-
-  let tempArray = [];
-  let selectedProducts = [];
-  let allProducts = ["gloves", "headguard", "hookbag", "mouthpiece", "pads", "vandages"];
-
-  /*useEffect(() => {
-    //dispatch(fetchShopData());
-  }, [visibleProducts, dispatch]);*/
 
   useEffect(() => {
-    fetch('http://localhost:8080/react/v1/products')
-       .then((res) => res.json())
-       .then((data) => {
-          setProductList(data);
-       })
-       .catch((err) => {
-          console.log(err.message);
-       });
- }, []);
+    fetchProductData(allProducts);
+  }, []);
 
- useEffect(() => {
-  setItems(visibleProducts);
-}, [visibleProducts]);
+  useEffect(() => {
+    setItems(visibleProducts);
+  }, [visibleProducts]);
 
   function modalFilter() {
     return (
@@ -123,81 +104,74 @@ const ShopPage = () => {
       case "filterAll":
         toggleFilterDisableRemaining(filterId);
         toggleFilter(currentButtonClass);
-        //tempArray = ProductCardList;
         selectedProducts = allProducts;
         break;
       case "filterPunchingBags":
         disableFilterAll(fillterAllButtonClass);
         toggleFilter(currentButtonClass);
-        //storeSelection(tempArray, "bag");
         storeSelection("bag");
         break;
       case "filterGloves":
         disableFilterAll(fillterAllButtonClass);
         toggleFilter(currentButtonClass);
-        //storeSelection(tempArray, "gloves");
         storeSelection("gloves");
         break;
       case "filterPads":
         disableFilterAll(fillterAllButtonClass);
         toggleFilter(currentButtonClass);
-        //storeSelection(tempArray, "pads");
         storeSelection("pads");
         break;
       case "filterHeadguards":
         disableFilterAll(fillterAllButtonClass);
         toggleFilter(currentButtonClass);
-        //storeSelection(tempArray, "headguard");
         storeSelection("headguard");
         break;
       case "filterVandages":
         disableFilterAll(fillterAllButtonClass);
         toggleFilter(currentButtonClass);
-        //storeSelection(tempArray, "vandages");
         storeSelection("vandages");
         break;
       case "filterMouthPieces":
         disableFilterAll(fillterAllButtonClass);
         toggleFilter(currentButtonClass);
-        //storeSelection(tempArray, "mouth");
         storeSelection("mouthpiece");
         break;
       default:
         toggleFilterDisableRemaining(filterId);
         toggleFilter(currentButtonClass);
-        //tempArray = ProductCardList;
         selectedProducts = allProducts;
         break;
     };
   };
 
   const storeSelection = (keyword) => {
-    //ProductCardList.forEach(product => product.props.title.toLowerCase().includes(keyword) && tempArray.push(product));
     selectedProducts.push(keyword);
   };
 
   const displayFilteredHandler = () => {
-   toggleFilterDisableRemaining("filterAll");
+    toggleFilterDisableRemaining("filterAll");
+    fetchProductData(selectedProducts);
+  };
 
-   fetch('http://localhost:8080/react/v1/products/selectedProducts', 
-   {
-    method: 'POST', 
-    mode: 'cors', 
-    body: JSON.stringify(selectedProducts),
-    headers: {
-      'Accept': 'application/json, text/plain',
-      'Content-Type': 'application/json'
-    }
-  })
+  function fetchProductData(products) {
+    fetch('http://localhost:8080/react/v1/products/selectedProducts',
+      {
+        method: 'POST',
+        mode: 'cors',
+        body: JSON.stringify(products),
+        headers: {
+          'Accept': 'application/json, text/plain',
+          'Content-Type': 'application/json'
+        }
+      })
       .then((res) => res.json())
       .then((data) => {
-         setProductList(data);
+        setProductList(data);
       })
       .catch((err) => {
-         console.log(err.message);
+        console.log(err.message);
       });
-
-  };
+  }
 
   return (
     <Fragment>
@@ -244,6 +218,7 @@ const ShopPage = () => {
 };
 
 export default ShopPage;
+
 
 function toggleFilter(currentButtonClass) {
   if (currentButtonClass.classList.contains('text-muted')) {
