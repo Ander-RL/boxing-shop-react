@@ -1,45 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from 'react-redux';
+import React from "react";
 
 import Container from "../components/UI/Container";
-import CheckoutProductCard from "../components/Card/CheckoutProductCard";
 
 
 const AccountPage = () => {
-
-    const cartItems = useSelector(state => state.cart.items);
-    const cartTotal = useSelector(state => state.cart.totalAmount);
-
-    const [standard, setStandard] = useState(false);
-    const [express, setExpress] = useState(true);
-    const [totalShipping, setTotalShipping] = useState(10);
-    const [totalCheckout, setTotalCheckout] = useState(cartTotal + totalShipping);
-
-    const shippingMethodHandler = (e) => {
-        console.log(e.target.id);
-
-        const shippingMethod = e.target.id;
-
-        if (shippingMethod === "expressShipping" && express === false) {
-            setExpress(true);
-            setStandard(false);
-        }
-
-        if (shippingMethod === "standardShipping" && standard === false) {
-            setExpress(false);
-            setStandard(true);
-        }
-    };
-
-    useEffect(() => {
-        if (express) {
-            setTotalShipping(10);
-        } else {
-            setTotalShipping(2);
-        }
-        setTotalCheckout(cartTotal + totalShipping);
-
-    }, [standard, express, totalShipping, totalCheckout, cartTotal]);
 
     return (
         <React.Fragment>
