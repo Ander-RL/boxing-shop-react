@@ -25,11 +25,11 @@ const Navbar = () => {
                                 <Link to="/shop" className="nav-link text-black" href="#">Shop</Link>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link text-black" href="#">My Account</a>
+                                <Link to="/account" className="nav-link text-black" href="#">My Account</Link>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link text-black" href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart">My Cart&nbsp;&nbsp;
-                                <i className="bi bi-cart-fill text-black"></i></a>
+                                <button className="nav-link text-black" href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart">My Cart&nbsp;&nbsp;
+                                <i className="bi bi-cart-fill text-black"></i></button>
                             </li>
                         </ul>
                     </div>
