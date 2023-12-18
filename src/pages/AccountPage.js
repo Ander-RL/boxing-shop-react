@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import Container from "../components/UI/Container";
 import AccountInfoCard from "../components/Card/AccountInfoCard";
@@ -6,6 +6,52 @@ import AccountTab from "../components/Card/AccountTab";
 
 
 const AccountPage = () => {
+
+    var isInfo = "dark";
+    var isOrders = "secondary-emphasis";
+    var isBook = "secondary-emphasis";
+    var isWishlist = "secondary-emphasis";
+    var isPassword = "secondary-emphasis";
+
+    const [tabs, setTabs] = useState([isInfo, isOrders, isBook, isWishlist, isPassword]);
+
+    var tempTabs = [isInfo, isOrders, isBook, isWishlist, isPassword];
+
+    useEffect(() => {
+    }, [tabs]);
+
+    const toggleActiveTab = (currentTab) => {
+        for(var i = 0; i < tabs.length; i++) {
+            i !== currentTab ? tempTabs[i] = "secondary-emphasi" : tempTabs[i] = "dark";
+        };
+        setTabs(tempTabs);
+    };
+
+    const setTabActive = (tabName) => {
+        switch (tabName) {
+            case "Account information":
+                toggleActiveTab(0);
+                break;
+            case "My orders":
+                toggleActiveTab(1);
+                break;
+            case "Address book":
+                toggleActiveTab(2);
+                break;
+            case "Wishlist":
+                toggleActiveTab(3);
+                break;
+            case "Change password":
+                toggleActiveTab(4);
+                break;
+            default:
+                toggleActiveTab(0);
+        }
+    };
+
+    const isSelectedHandled = (tab) => {
+        setTabActive(tab.target.textContent);
+    };
 
     return (
         <React.Fragment>
@@ -18,21 +64,21 @@ const AccountPage = () => {
                         <div className="d-flex flex-column d-sm-flex flex-sm-row">
                             <div className="card m-1 w-100">
 
-                                <AccountTab tabSelected="dark" tabName="Account information"/>
-                                <AccountTab tabSelected="secondary-emphasis" tabName="My orders"/>
-                                <AccountTab tabSelected="secondary-emphasis" tabName="Address book"/>
-                                <AccountTab tabSelected="secondary-emphasis" tabName="Wishlist"/>
-                                <AccountTab tabSelected="secondary-emphasis" tabName="Change password"/>
+                                <AccountTab isSelected={isSelectedHandled} tabSelected={tabs[0]} tabName="Account information" />
+                                <AccountTab isSelected={isSelectedHandled} tabSelected={tabs[1]} tabName="My orders" />
+                                <AccountTab isSelected={isSelectedHandled} tabSelected={tabs[2]} tabName="Address book" />
+                                <AccountTab isSelected={isSelectedHandled} tabSelected={tabs[3]} tabName="Wishlist" />
+                                <AccountTab isSelected={isSelectedHandled} tabSelected={tabs[4]} tabName="Change password" />
 
                             </div>
                         </div>
-                        
+
                     </div>
 
 
                     <div className="col-lg-10 col-md-10 col-sm-10">
 
-                        <AccountInfoCard/>
+                        <AccountInfoCard />
 
                     </div>
 
