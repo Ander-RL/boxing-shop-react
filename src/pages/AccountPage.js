@@ -22,7 +22,7 @@ const AccountPage = () => {
 
     const toggleActiveTab = (currentTab) => {
         for(var i = 0; i < tabs.length; i++) {
-            i !== currentTab ? tempTabs[i] = "secondary-emphasi" : tempTabs[i] = "dark";
+            i !== currentTab ? tempTabs[i] = "secondary-emphasis" : tempTabs[i] = "dark";
         };
         setTabs(tempTabs);
     };
@@ -62,7 +62,7 @@ const AccountPage = () => {
                     <div className="col">
 
                         <div className="d-flex flex-column d-sm-flex flex-sm-row">
-                            <div className="card m-1 w-100">
+                            <div className="card m-1 w-100 border-0">
 
                                 <AccountTab isSelected={isSelectedHandled} tabSelected={tabs[0]} tabName="Account information" />
                                 <AccountTab isSelected={isSelectedHandled} tabSelected={tabs[1]} tabName="My orders" />
