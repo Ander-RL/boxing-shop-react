@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Container from "../components/UI/Container";
 import AccountInfoCard from "../components/Card/AccountInfoCard";
 import AccountTab from "../components/Card/AccountTab";
+import AddressBookCard from "../components/Card/AddressBookCard";
 
 
 const AccountPage = () => {
@@ -13,7 +14,13 @@ const AccountPage = () => {
     var isWishlist = "secondary-emphasis";
     var isPassword = "secondary-emphasis";
 
+    const components = {
+        "AccountInfoCard": <AccountInfoCard />,
+        "AddressBookCard": <AddressBookCard />
+    };
+
     const [tabs, setTabs] = useState([isInfo, isOrders, isBook, isWishlist, isPassword]);
+    const [component, setComponent] = useState(components.AccountInfoCard);
 
     var tempTabs = [isInfo, isOrders, isBook, isWishlist, isPassword];
 
@@ -31,12 +38,14 @@ const AccountPage = () => {
         switch (tabName) {
             case "Account information":
                 toggleActiveTab(0);
+                setComponent(components.AccountInfoCard);
                 break;
             case "My orders":
                 toggleActiveTab(1);
                 break;
             case "Address book":
                 toggleActiveTab(2);
+                setComponent(components.AddressBookCard);
                 break;
             case "Wishlist":
                 toggleActiveTab(3);
@@ -78,7 +87,7 @@ const AccountPage = () => {
 
                     <div className="col-lg-10 col-md-10 col-sm-10">
 
-                        <AccountInfoCard />
+                        {component}
 
                     </div>
 
