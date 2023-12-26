@@ -9,7 +9,7 @@ const filterList = ["filterAll", "filterPunchingBags", "filterGloves", "filterPa
 const ShopPage = () => {
 
   let selectedProducts = [];
-  let allProducts = ["gloves", "headguard", "hookbag", "mouthpiece", "pads", "vandages"];
+  let allProducts = ["gloves", "headguard", "hookbag", "mouthpiece", "pads", "vandages", "bag"];
 
   const [items, setItems] = useState(ProductCardList);
   const [visibleProducts, setVisibleProducts] = useState([]);
@@ -51,7 +51,7 @@ const ShopPage = () => {
             <button
               id="filterPunchingBags"
               className="nav-link active text-muted"
-              onClick={filterOnClickHandler}>Punchin Bags</button>
+              onClick={filterOnClickHandler}>Punching Bags</button>
           </li>
           <li className="nav-item" key="2">
             <button
