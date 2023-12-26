@@ -118,14 +118,12 @@ const CheckoutPage = () => {
                             </div>
                         </div>
 
-                        <div className="d-flex flex-column d-sm-flex flex-sm-row">
+                        <div className="d-flex justify-content-center">
                             <div className="card m-1 w-100">
-                                <div className="card-body">
                                     <button type="button" className="btn btn-dark" data-bs-dismiss="offcanvas" href="#">
                                         Order now&nbsp;&nbsp;
                                         <i className="bi bi-cart-fill text-light"></i>
                                     </button>
-                                </div>
                             </div>
                         </div>
 
