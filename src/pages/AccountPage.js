@@ -4,6 +4,7 @@ import Container from "../components/UI/Container";
 import AccountInfoCard from "../components/Card/AccountInfoCard";
 import AccountTab from "../components/Card/AccountTab";
 import AddressBookCard from "../components/Card/AddressBookCard";
+import MyOrdersCard from "../components/Card/MyOrdersCard";
 
 
 const AccountPage = () => {
@@ -16,7 +17,8 @@ const AccountPage = () => {
 
     const components = {
         "AccountInfoCard": <AccountInfoCard />,
-        "AddressBookCard": <AddressBookCard />
+        "AddressBookCard": <AddressBookCard />,
+        "MyOrdersCard": <MyOrdersCard />
     };
 
     const [tabs, setTabs] = useState([isInfo, isOrders, isBook, isWishlist, isPassword]);
@@ -42,6 +44,7 @@ const AccountPage = () => {
                 break;
             case "My orders":
                 toggleActiveTab(1);
+                setComponent(components.MyOrdersCard);
                 break;
             case "Address book":
                 toggleActiveTab(2);
