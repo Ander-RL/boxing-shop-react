@@ -82,7 +82,7 @@ const AddressBookCard = () => {
                 <h5 className="card-title">My Orders</h5>
                 <hr className="bg-dark border-2 border-top border-black" />
 
-                <div className="d-flex flex-column d-sm-flex flex-sm-row">
+                <div className="row justify-content-center">
                     {products}
                 </div>
 
