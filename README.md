@@ -6,6 +6,18 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+### `npm install`
+
+Installs project dependencies.
+
+### `npm install redux`
+
+Installs redux in case npm install didn´t.
+
+### `npm install react-redux`
+
+Installs redux in case npm install redux didn´t.
+
 ### `npm start`
 
 Runs the app in the development mode.\
