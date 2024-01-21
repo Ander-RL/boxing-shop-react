@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import ProductCard from "./ProductCard";
+import MyOrdersProductCard from "./MyOrdersProductCard";
 
 const AddressBookCard = () => {
 
@@ -63,7 +63,7 @@ const AddressBookCard = () => {
     const setProductList = (orderItems) => {
         let list = [];
         orderItems.forEach(item => list.push(
-            <ProductCard
+            <MyOrdersProductCard
                 key={item.id}
                 id={item.id}
                 img={`/img/${item.img}`}
@@ -82,13 +82,9 @@ const AddressBookCard = () => {
                 <h5 className="card-title">My Orders</h5>
                 <hr className="bg-dark border-2 border-top border-black" />
 
-                <div className="card m-1 w-100 border-black">
-                    <div className="card-body">
-                        <h5 className="card-title">My Order Nº1</h5>
-                    </div>
+                <div className="d-flex flex-column d-sm-flex flex-sm-row">
+                    {products}
                 </div>
-
-                {products}
 
             </div>
         </div>
