@@ -30,7 +30,7 @@ const AccountPage = () => {
     }, [tabs]);
 
     const toggleActiveTab = (currentTab) => {
-        for(var i = 0; i < tabs.length; i++) {
+        for (var i = 0; i < tabs.length; i++) {
             i !== currentTab ? tempTabs[i] = "secondary-emphasis" : tempTabs[i] = "dark";
         };
         setTabs(tempTabs);
@@ -69,32 +69,34 @@ const AccountPage = () => {
         <React.Fragment>
             <Container type="fluid" id="checkout">
 
-                <div className="d-flex flex-column d-sm-flex flex-sm-row">
+                <div className="row p-2 pt-3 justify-content-end">
+                    <div className="d-flex flex-column d-sm-flex flex-sm-row">
 
-                    <div className="col">
+                        <div className="col">
 
-                        <div className="d-flex flex-column d-sm-flex flex-sm-row">
-                            <div className="card m-1 w-100 border-0">
+                            <div className="d-flex flex-column d-sm-flex flex-sm-row">
+                                <div className="card m-1 w-100 border-0">
 
-                                <AccountTab isSelected={isSelectedHandled} tabSelected={tabs[0]} tabName="Account information" />
-                                <AccountTab isSelected={isSelectedHandled} tabSelected={tabs[1]} tabName="My orders" />
-                                <AccountTab isSelected={isSelectedHandled} tabSelected={tabs[2]} tabName="Address book" />
-                                <AccountTab isSelected={isSelectedHandled} tabSelected={tabs[3]} tabName="Wishlist" />
-                                <AccountTab isSelected={isSelectedHandled} tabSelected={tabs[4]} tabName="Change password" />
+                                    <AccountTab isSelected={isSelectedHandled} tabSelected={tabs[0]} tabName="Account information" />
+                                    <AccountTab isSelected={isSelectedHandled} tabSelected={tabs[1]} tabName="My orders" />
+                                    <AccountTab isSelected={isSelectedHandled} tabSelected={tabs[2]} tabName="Address book" />
+                                    <AccountTab isSelected={isSelectedHandled} tabSelected={tabs[3]} tabName="Wishlist" />
+                                    <AccountTab isSelected={isSelectedHandled} tabSelected={tabs[4]} tabName="Change password" />
 
+                                </div>
                             </div>
+
                         </div>
 
+
+                        <div className="col-lg-10 col-md-10 col-sm-10">
+
+                            {component}
+
+                        </div>
+
+
                     </div>
-
-
-                    <div className="col-lg-10 col-md-10 col-sm-10">
-
-                        {component}
-
-                    </div>
-
-
                 </div>
             </Container>
         </React.Fragment >
