@@ -41,6 +41,10 @@ const CheckoutPage = () => {
 
     }, [standard, express, totalShipping, totalCheckout, cartTotal]);
 
+    const sendPurchaseData = () => {
+        console.log("SENDING PURCHASE DATA");
+    };
+
     return (
         <React.Fragment>
             <Container type="fluid" id="checkout">
@@ -121,7 +125,7 @@ const CheckoutPage = () => {
 
                             <div className="d-flex justify-content-center">
                                 <div className="card m-1 w-100">
-                                    <button type="button" className="btn btn-dark" data-bs-dismiss="offcanvas" href="#">
+                                    <button type="button" onClick={sendPurchaseData} className="btn btn-dark">
                                         Order now&nbsp;&nbsp;
                                         <i className="bi bi-cart-fill text-light"></i>
                                     </button>
