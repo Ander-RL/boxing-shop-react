@@ -62,6 +62,7 @@ const AddressBookCard = () => {
 
     const setProductList = (orderItems) => {
         let list = [];
+        console.log(orderItems);
         orderItems.forEach(item => list.push(
             <MyOrdersProductCard
                 key={item.id}
@@ -70,6 +71,7 @@ const AddressBookCard = () => {
                 title={item.name}
                 description={item.description}
                 price={item.price}
+                quantity={item.quantity}
             />
         ));
 

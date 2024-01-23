@@ -6,7 +6,8 @@ import { cartActions } from "../../store/cart-slice";
 const MyOrdersProductCard = (props) => {
     const dispatch = useDispatch();
 
-    const { id, title, price, img, description } = props;
+    const { id, title, price, quantity, img, description } = props;
+    const totalPrice = price * quantity
 
     const addToCartHandler = () => {
         dispatch(cartActions.addItemToCart({
@@ -37,11 +38,11 @@ const MyOrdersProductCard = (props) => {
                     </div>
                     <div className="row">
                         <span className="badge bg-secondary rounded-pill">QUANTITY</span>
-                        <span className="card-text">XX</span>
+                        <span className="card-text">{props.quantity}</span>
                     </div>
                     <div className="row">
                         <span className="badge bg-secondary rounded-pill">TOTAL PRICE</span>
-                        <span className="card-text">XX</span>
+                        <span className="card-text">{totalPrice}€</span>
                     </div>
                 </div>
 
