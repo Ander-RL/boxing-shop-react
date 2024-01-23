@@ -32,15 +32,15 @@ const MyOrdersProductCard = (props) => {
 
                 <div className="card-body bg-body-tertiary rounded mb-3 text-center">
                     <div className="row ">
-                        <span className="badge bg-secondary rounded-pill">Price</span>
+                        <span className="badge bg-secondary rounded-pill">PRICE</span>
                         <span className="card-text">{props.price}€</span>
                     </div>
                     <div className="row">
-                        <span className="badge bg-secondary rounded-pill">Quantity</span>
+                        <span className="badge bg-secondary rounded-pill">QUANTITY</span>
                         <span className="card-text">XX</span>
                     </div>
                     <div className="row">
-                        <span className="badge bg-secondary rounded-pill">Total Price</span>
+                        <span className="badge bg-secondary rounded-pill">TOTAL PRICE</span>
                         <span className="card-text">XX</span>
                     </div>
                 </div>
