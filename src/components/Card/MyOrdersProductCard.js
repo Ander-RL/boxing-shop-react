@@ -7,7 +7,7 @@ const MyOrdersProductCard = (props) => {
     const dispatch = useDispatch();
 
     const { id, title, price, quantity, img, description } = props;
-    const totalPrice = price * quantity
+    const totalPrice = price * quantity;
 
     const addToCartHandler = () => {
         dispatch(cartActions.addItemToCart({
