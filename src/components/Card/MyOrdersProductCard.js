@@ -1,25 +1,8 @@
 import React from "react";
-import { useDispatch } from 'react-redux';
-
-import { cartActions } from "../../store/cart-slice";
 
 const MyOrdersProductCard = (props) => {
-    const dispatch = useDispatch();
-
-    const { id, title, price, quantity, img, description } = props;
-    const totalPrice = price * quantity;
-
-    const addToCartHandler = () => {
-        dispatch(cartActions.addItemToCart({
-            id: id,
-            price: Number(price),
-            quantity: 1,
-            totalPrice: Number(price),
-            name: title,
-            img: img,
-            description: description
-        }));
-    };
+    
+    const totalPrice = props.price * props.quantity;
 
     return (
         <div className="card text-bg-light m-2 shadow p-3 bg-white rounded" style={{ maxWidth: '18rem' }} key={props.id}>
