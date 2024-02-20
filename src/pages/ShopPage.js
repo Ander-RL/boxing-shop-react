@@ -17,19 +17,20 @@ const ShopPage = () => {
   const renderCount = useRef(0);
   useEffect(() => {
     renderCount.current = renderCount.current + 1;
-    console.log("[LOG][Render Count] ", renderCount);
+    console.log("[LOG][ShopPage][Render Count] ", renderCount);
   });
 
   const setProductList = (shopItems) => {
+    console.log("[LOG][ShopPage][setProductList] dataItems:", shopItems);
     let list = [];
     shopItems.forEach(item => list.push(
       <ProductCard
-        key={item.id}
-        id={item.id}
+        key={item.productId}
+        id={item.productId}
         img={`/img/${item.img}`}
         title={item.name}
         description={item.description}
-        price={item.price}
+        price={item.unitaryAmount}
       />
     ));
     setVisibleProducts(list);

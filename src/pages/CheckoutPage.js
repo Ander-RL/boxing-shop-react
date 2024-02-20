@@ -42,7 +42,45 @@ const CheckoutPage = () => {
     }, [standard, express, totalShipping, totalCheckout, cartTotal]);
 
     const sendPurchaseData = () => {
-        console.log("SENDING PURCHASE DATA");
+        console.log("[LOG][CheckoutPage][sendPurchaseDatat]", "Sending Order");
+        var order = {
+            customerId: 458907,
+            products: []
+        };
+        console.log("[LOG][CheckoutPage][sendPurchaseDatat] CartItems =", cartItems);
+        cartItems.forEach(element => {
+            order.products.push(
+                {
+                    purchasedProduct: element.id,
+                    quantity: element.quantity
+                }
+            );
+        });
+
+        console.log("[LOG][CheckoutPage][sendPurchaseDatat] Order =", order);
+
+        fetch('http://localhost:8080/react/v1/orders/checkout',
+            {
+                method: 'POST',
+                mode: 'cors',
+                body: JSON.stringify(order),
+                headers: {
+                    'Accept': 'application/json, text/plain',
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then((res) => {
+                console.log("[LOG][CheckoutPage][sendPurchaseDatat] ", res.json());
+            })
+            .then((data) => {
+                console.log("[LOG][CheckoutPage][sendPurchaseDatat] ", data);
+            })
+            .catch((err) => {
+                console.log("[LOG][CheckoutPage][sendPurchaseDatat] ", err.message);
+            });
+
+        console.log("[LOG][CheckoutPage][sendPurchaseDatat] ", "Order sent!");
+
     };
 
     return (
