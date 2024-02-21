@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from 'react-redux';
+import { Modal, Button } from 'react-bootstrap';
 
 import Container from "../components/UI/Container";
 import CheckoutProductCard from "../components/Card/CheckoutProductCard";
@@ -14,6 +15,13 @@ const CheckoutPage = () => {
     const [express, setExpress] = useState(true);
     const [totalShipping, setTotalShipping] = useState(10);
     const [totalCheckout, setTotalCheckout] = useState(cartTotal + totalShipping);
+    const [isOrderConfirmed, setIsOrderConfirmed] = useState(false);
+    const [response, setResponse] = useState({
+        customerId: 0,
+        orderId: 0,
+        products: [],
+        totalAmount: 0
+    });
 
     const shippingMethodHandler = (e) => {
         console.log(e.target.id);
@@ -41,13 +49,14 @@ const CheckoutPage = () => {
 
     }, [standard, express, totalShipping, totalCheckout, cartTotal]);
 
-    const sendPurchaseData = () => {
-        console.log("[LOG][CheckoutPage][sendPurchaseDatat]", "Sending Order");
+    function sendOrder() {
+        console.log("[LOG][CheckoutPage][sendOrder]", "Sending Order");
+
         var order = {
             customerId: 458907,
             products: []
         };
-        console.log("[LOG][CheckoutPage][sendPurchaseDatat] CartItems =", cartItems);
+        console.log("[LOG][CheckoutPage][sendOrder] CartItems =", cartItems);
         cartItems.forEach(element => {
             order.products.push(
                 {
@@ -57,7 +66,8 @@ const CheckoutPage = () => {
             );
         });
 
-        console.log("[LOG][CheckoutPage][sendPurchaseDatat] Order =", order);
+        console.log("[LOG][CheckoutPage][sendOrder] Order =", order);
+        console.log("[LOG][CheckoutPage][sendPurchaseDatat] ", "Order sent!");
 
         fetch('http://localhost:8080/react/v1/orders/checkout',
             {
@@ -70,18 +80,67 @@ const CheckoutPage = () => {
                 }
             })
             .then((res) => {
-                console.log("[LOG][CheckoutPage][sendPurchaseDatat] ", res.json());
+                return res.json();
             })
             .then((data) => {
-                console.log("[LOG][CheckoutPage][sendPurchaseDatat] ", data);
+                console.log("[LOG][CheckoutPage][sendOrder] data:", data);
+                setOrderResponse(data);
             })
             .catch((err) => {
-                console.log("[LOG][CheckoutPage][sendPurchaseDatat] ", err.message);
+                console.log("[LOG][CheckoutPage][sendOrder] error:", err.message);
             });
+    }
 
-        console.log("[LOG][CheckoutPage][sendPurchaseDatat] ", "Order sent!");
-
+    const setOrderResponse = (data) => {
+        setResponse(data);
     };
+
+
+    useEffect(() => {
+        console.log("[LOG][CheckoutPage][useEffect] response:", response);
+        console.log("[LOG][CheckoutPage][useEffect] isOrderConfirmed:", isOrderConfirmed);
+        response.customerId === 0 ? setIsOrderConfirmed(false) : setIsOrderConfirmed(true);
+    }, [response]);
+
+    const handleClose = () => setIsOrderConfirmed(false);
+
+    const orderReadyModal = (
+        <Modal show={isOrderConfirmed} onHide={handleClose} size="sm">
+            <Modal.Header closeButton>
+                <Modal.Title>Modal title</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <p>{response.customerId}</p>
+                <p>{response.orderId}</p>
+                <p>{response.products.forEach(
+                    element => {
+                        <div>
+                            <p>{element.purchasedProduct}</p>
+                            <p>{element.quantity}</p>
+                        </div>
+                    }
+                )}</p>
+                <p>{response.totalAmount}</p>
+            </Modal.Body>
+            <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>Close</Button>
+            </Modal.Footer>
+        </Modal>
+    );
+
+    const preparingOrderModal = (
+        <Modal show={isOrderConfirmed} onHide={handleClose} size="sm">
+            <Modal.Header closeButton>
+                <Modal.Title>Modal title</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                Preparing order, please wait.
+            </Modal.Body>
+            <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>Close</Button>
+            </Modal.Footer>
+        </Modal>
+    );
 
     return (
         <React.Fragment>
@@ -156,14 +215,16 @@ const CheckoutPage = () => {
                                     <div className="card-body">
                                         <h5 className="card-title">Helpful links</h5>
                                         <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                                        <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                        <p className="card-text">
+                                            Some quick example text to build on the card title and make up the bulk of the card's content.
+                                        </p>
                                     </div>
                                 </div>
                             </div>
 
                             <div className="d-flex justify-content-center">
                                 <div className="card m-1 w-100">
-                                    <button type="button" onClick={sendPurchaseData} className="btn btn-dark">
+                                    <button type="button" onClick={sendOrder} className="btn btn-dark" disabled={cartItems.length === 0 ? true : false}>
                                         Order now&nbsp;&nbsp;
                                         <i className="bi bi-cart-fill text-light"></i>
                                     </button>
@@ -173,6 +234,9 @@ const CheckoutPage = () => {
                         </div>
                     </div>
                 </div>
+
+                {isOrderConfirmed ? orderReadyModal : preparingOrderModal}
+
             </Container>
         </React.Fragment >
     );
