@@ -22,6 +22,8 @@ const CheckoutPage = () => {
         products: [],
         totalAmount: 0
     });
+    const [products, setProducts] = useState([]);
+
 
     const shippingMethodHandler = (e) => {
         console.log(e.target.id);
@@ -50,13 +52,12 @@ const CheckoutPage = () => {
     }, [standard, express, totalShipping, totalCheckout, cartTotal]);
 
     function sendOrder() {
-        console.log("[LOG][CheckoutPage][sendOrder]", "Sending Order");
 
         var order = {
             customerId: 458907,
             products: []
         };
-        console.log("[LOG][CheckoutPage][sendOrder] CartItems =", cartItems);
+
         cartItems.forEach(element => {
             order.products.push(
                 {
@@ -65,9 +66,6 @@ const CheckoutPage = () => {
                 }
             );
         });
-
-        console.log("[LOG][CheckoutPage][sendOrder] Order =", order);
-        console.log("[LOG][CheckoutPage][sendPurchaseDatat] ", "Order sent!");
 
         fetch('http://localhost:8080/react/v1/orders/checkout',
             {
@@ -93,12 +91,15 @@ const CheckoutPage = () => {
 
     const setOrderResponse = (data) => {
         setResponse(data);
+        let list = [];
+        response.products.map((product, index) => {
+            list.push(<p key={index}> {product.purchasedProduct} </p>)
+        });
+        setProducts(list);
     };
 
 
     useEffect(() => {
-        console.log("[LOG][CheckoutPage][useEffect] response:", response);
-        console.log("[LOG][CheckoutPage][useEffect] isOrderConfirmed:", isOrderConfirmed);
         response.customerId === 0 ? setIsOrderConfirmed(false) : setIsOrderConfirmed(true);
     }, [response]);
 
@@ -107,20 +108,13 @@ const CheckoutPage = () => {
     const orderReadyModal = (
         <Modal show={isOrderConfirmed} onHide={handleClose} size="sm">
             <Modal.Header closeButton>
-                <Modal.Title>Modal title</Modal.Title>
+                <Modal.Title>Order details</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <p>{response.customerId}</p>
-                <p>{response.orderId}</p>
-                <p>{response.products.forEach(
-                    element => {
-                        <div>
-                            <p>{element.purchasedProduct}</p>
-                            <p>{element.quantity}</p>
-                        </div>
-                    }
-                )}</p>
-                <p>{response.totalAmount}</p>
+                <p>Order id: {response.orderId}</p>
+                <p>Customer id: {response.customerId}</p>
+                <p>Total amount: {response.totalAmount}€</p>
+                {products}
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>Close</Button>
@@ -243,3 +237,16 @@ const CheckoutPage = () => {
 };
 
 export default CheckoutPage;
+
+
+
+/*
+                <p>{response.products.forEach(
+                    product => {
+                        <ul>
+                            <li>{product.purchasedProduct}</li>
+                            <li>{product.quantity}</li>
+                        </ul>
+                    })}
+                </p>
+ */
