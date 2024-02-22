@@ -16,6 +16,7 @@ const CheckoutPage = () => {
     const [totalShipping, setTotalShipping] = useState(10);
     const [totalCheckout, setTotalCheckout] = useState(cartTotal + totalShipping);
     const [isOrderConfirmed, setIsOrderConfirmed] = useState(false);
+    const [isOrderSent, setIsOrderSent] = useState(false);
     const [response, setResponse] = useState({
         customerId: 0,
         orderId: 0,
@@ -52,6 +53,7 @@ const CheckoutPage = () => {
     }, [standard, express, totalShipping, totalCheckout, cartTotal]);
 
     function sendOrder() {
+        setIsOrderSent(true);
 
         var order = {
             customerId: 458907,
@@ -96,12 +98,13 @@ const CheckoutPage = () => {
         });
         setResponse(data);
         setProducts(list);
+        setIsOrderSent(false);
         console.log("[LOG][CheckoutPage][setOrderResponse] list:", list);
     };
 
 
     useEffect(() => {
-        if(response.customerId != 0 && products.length != 0) {
+        if (response.customerId !== 0 && products.length !== 0) {
             setIsOrderConfirmed(true);
         } else {
             setIsOrderConfirmed(false);
@@ -109,10 +112,13 @@ const CheckoutPage = () => {
         console.log("[LOG][CheckoutPage][useEffect] Products:", products);
     }, [products]);
 
-    const handleClose = () => setIsOrderConfirmed(false);
+    const handleClose = () => {
+        setIsOrderConfirmed(false);
+        setIsOrderSent(false);
+    };
 
     const orderReadyModal = (
-        <Modal show={isOrderConfirmed} onHide={handleClose} size="sm">
+        <Modal show={isOrderConfirmed} onHide={handleClose} size="m">
             <Modal.Header closeButton>
                 <Modal.Title>Order details</Modal.Title>
             </Modal.Header>
@@ -129,16 +135,15 @@ const CheckoutPage = () => {
     );
 
     const preparingOrderModal = (
-        <Modal show={isOrderConfirmed} onHide={handleClose} size="sm">
-            <Modal.Header closeButton>
-                <Modal.Title>Modal title</Modal.Title>
+        <Modal show={!isOrderConfirmed && isOrderSent} onHide={handleClose} size="m">
+            <Modal.Header>
+                <Modal.Title>Preparing order, please wait.</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                Preparing order, please wait.
+                <div className="spinner-border" role="status">
+                    <span className="visually-hidden">Preparing order, please wait.</span>
+                </div>
             </Modal.Body>
-            <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>Close</Button>
-            </Modal.Footer>
         </Modal>
     );
 
@@ -243,16 +248,3 @@ const CheckoutPage = () => {
 };
 
 export default CheckoutPage;
-
-
-
-/*
-                <p>{response.products.forEach(
-                    product => {
-                        <ul>
-                            <li>{product.purchasedProduct}</li>
-                            <li>{product.quantity}</li>
-                        </ul>
-                    })}
-                </p>
- */
