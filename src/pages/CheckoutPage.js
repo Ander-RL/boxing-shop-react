@@ -90,18 +90,24 @@ const CheckoutPage = () => {
     }
 
     const setOrderResponse = (data) => {
-        setResponse(data);
         let list = [];
-        response.products.map((product, index) => {
+        data.products.map((product, index) => {
             list.push(<p key={index}> {product.purchasedProduct} </p>)
         });
+        setResponse(data);
         setProducts(list);
+        console.log("[LOG][CheckoutPage][setOrderResponse] list:", list);
     };
 
 
     useEffect(() => {
-        response.customerId === 0 ? setIsOrderConfirmed(false) : setIsOrderConfirmed(true);
-    }, [response]);
+        if(response.customerId != 0 && products.length != 0) {
+            setIsOrderConfirmed(true);
+        } else {
+            setIsOrderConfirmed(false);
+        }
+        console.log("[LOG][CheckoutPage][useEffect] Products:", products);
+    }, [products]);
 
     const handleClose = () => setIsOrderConfirmed(false);
 
