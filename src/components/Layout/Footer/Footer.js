@@ -3,7 +3,7 @@ import Container from "../../UI/Container";
 
 const Footer = () => {
     return (
-        <Container type="fluid" style="bg-light p-5" id="footer">
+        <Container type="fluid mt-auto" style="bg-light p-5" id="footer">
             <div className="row">
 
                 <div className="col-lg col-md-12">
