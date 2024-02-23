@@ -118,7 +118,7 @@ const CheckoutPage = () => {
     };
 
     const orderReadyModal = (
-        <Modal show={isOrderConfirmed} onHide={handleClose} size="m">
+        <Modal show={isOrderConfirmed} onHide={handleClose} size="m" backdrop='static' centered='true'>
             <Modal.Header closeButton>
                 <Modal.Title>Order details</Modal.Title>
             </Modal.Header>
@@ -135,13 +135,15 @@ const CheckoutPage = () => {
     );
 
     const preparingOrderModal = (
-        <Modal show={!isOrderConfirmed && isOrderSent} onHide={handleClose} size="m">
+        <Modal show={!isOrderConfirmed && isOrderSent} onHide={handleClose} size="m" backdrop='static' centered='true'>
             <Modal.Header>
                 <Modal.Title>Preparing order, please wait.</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <div className="spinner-border" role="status">
-                    <span className="visually-hidden">Preparing order, please wait.</span>
+                <div class="d-flex justify-content-center">
+                    <div className="spinner-border" role="status">
+                        <span className="visually-hidden">Preparing order, please wait.</span>
+                    </div>
                 </div>
             </Modal.Body>
         </Modal>
