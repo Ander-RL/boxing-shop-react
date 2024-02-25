@@ -4,6 +4,7 @@ import { Modal, Button } from 'react-bootstrap';
 
 import Container from "../components/UI/Container";
 import CheckoutProductCard from "../components/Card/CheckoutProductCard";
+import CheckoutProductModalCard from "../components/Card/CheckoutProductModalCard";
 
 
 const CheckoutPage = () => {
@@ -93,8 +94,19 @@ const CheckoutPage = () => {
 
     const setOrderResponse = (data) => {
         let list = [];
-        data.products.map((product, index) => {
-            list.push(<p key={index}> {product.purchasedProduct} </p>)
+        cartItems.forEach((product, index) => {
+            list.push(
+                <CheckoutProductModalCard
+                key={product.id}
+                id={product.id}
+                title={product.name}
+                img={product.img}
+                quantity={product.quantity}
+                price={product.price}
+                totalPrice={product.totalPrice}
+                description={product.description}
+            />
+            )
         });
         setResponse(data);
         setProducts(list);
@@ -118,7 +130,7 @@ const CheckoutPage = () => {
     };
 
     const orderReadyModal = (
-        <Modal show={isOrderConfirmed} onHide={handleClose} size="m" backdrop='static' centered='true'>
+        <Modal show={isOrderConfirmed} onHide={handleClose} size="m" backdrop='static' centered='true' scrollable='true'>
             <Modal.Header closeButton>
                 <Modal.Title>Order details</Modal.Title>
             </Modal.Header>
@@ -140,7 +152,7 @@ const CheckoutPage = () => {
                 <Modal.Title>Preparing order, please wait.</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <div class="d-flex justify-content-center">
+                <div className="d-flex justify-content-center">
                     <div className="spinner-border" role="status">
                         <span className="visually-hidden">Preparing order, please wait.</span>
                     </div>
