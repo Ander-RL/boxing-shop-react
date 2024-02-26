@@ -18,6 +18,8 @@ const CheckoutPage = () => {
     const [totalCheckout, setTotalCheckout] = useState(cartTotal + totalShipping);
     const [isOrderConfirmed, setIsOrderConfirmed] = useState(false);
     const [isOrderSent, setIsOrderSent] = useState(false);
+    const [error, setError] = useState({message: 'no error'});
+    const [orderFailed, setOrderFailed] = useState(false);
     const [response, setResponse] = useState({
         customerId: 0,
         orderId: 0,
@@ -81,6 +83,7 @@ const CheckoutPage = () => {
                 }
             })
             .then((res) => {
+                if (!res.ok) throw new Error('Failed to process order.');
                 return res.json();
             })
             .then((data) => {
@@ -89,6 +92,9 @@ const CheckoutPage = () => {
             })
             .catch((err) => {
                 console.log("[LOG][CheckoutPage][sendOrder] error:", err.message);
+                setError(err);
+                setOrderFailed(true);
+                setIsOrderConfirmed(false);
             });
     }
 
@@ -124,9 +130,11 @@ const CheckoutPage = () => {
         console.log("[LOG][CheckoutPage][useEffect] Products:", products);
     }, [products]);
 
+
     const handleClose = () => {
         setIsOrderConfirmed(false);
         setIsOrderSent(false);
+        setOrderFailed(false);
     };
 
     const orderReadyModal = (
@@ -147,7 +155,7 @@ const CheckoutPage = () => {
     );
 
     const preparingOrderModal = (
-        <Modal show={!isOrderConfirmed && isOrderSent} onHide={handleClose} size="m" backdrop='static' centered='true'>
+        <Modal show={!isOrderConfirmed && isOrderSent && !orderFailed} onHide={handleClose} size="m" backdrop='static' centered='true'>
             <Modal.Header>
                 <Modal.Title>Preparing order, please wait.</Modal.Title>
             </Modal.Header>
@@ -156,6 +164,19 @@ const CheckoutPage = () => {
                     <div className="spinner-border" role="status">
                         <span className="visually-hidden">Preparing order, please wait.</span>
                     </div>
+                </div>
+            </Modal.Body>
+        </Modal>
+    );
+
+    const errorModal = (
+        <Modal show={!isOrderConfirmed && isOrderSent && orderFailed} onHide={handleClose} size="m" centered='true'>
+            <Modal.Header>
+                <Modal.Title>Something went wrong.</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <div className="d-flex justify-content-center">
+                    <p className="alert alert-danger p-3">{error.message}</p>
                 </div>
             </Modal.Body>
         </Modal>
@@ -255,6 +276,7 @@ const CheckoutPage = () => {
                 </div>
 
                 {isOrderConfirmed ? orderReadyModal : preparingOrderModal}
+                {orderFailed && errorModal}
 
             </Container>
         </React.Fragment >
