@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { Modal, Button } from 'react-bootstrap';
 
 import MyOrdersProductCard from "./MyOrdersProductCard";
+import OrderCard from "./OrderCard";
+import CheckoutProductModalCard from "./CheckoutProductModalCard";
 
 const MyOrdersCard = () => {
 
@@ -9,6 +12,7 @@ const MyOrdersCard = () => {
     const [orders, setOrders] = useState([]);
     const [ordersCards, setOrdersCards] = useState([]);
     const [productsCards, setProductsCards] = useState([]);
+    const [showProductModal, setShowProductModal] = useState(false);
 
     useEffect(() => {
         fetchOrdersData();
@@ -74,34 +78,22 @@ const MyOrdersCard = () => {
         return idList;
     };
 
+    function showProductsModal() {
+        setShowProductModal(true);
+    }
+
     function setOrdersDetails(orders) {
         console.log("[LOG][MyOrdersCard][setOrdersDetails] orders:", orders);
         var ordersList = [];
         orders.forEach(order => {
             ordersList.push(
-                <div className="card p-0" style={{ maxWidth: '18rem' }}>
-                    <div className="row g-0">
-                        <div className="row g-0">
-                            <div className="col-8 col-lg-10">
-                                <div className="card-body">
-                                        <div className="col">
-                                            <h5 className="card-title">Order id: {order.orderId}</h5>
-                                            <p className="card-text p-0 m-0">Customer id: {order.customerId}</p>
-                                            <p className="card-text p-0 m-0">Address: Night City</p>
-                                        </div>
-                                    <div className="flex-row">
-                                        Products
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="flex-row">
-                            <div className="card-footer">
-                                <p className="card-text text-end fw-bolder">Order total: {order.totalAmount}€</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <OrderCard
+                    id={order.orderId}
+                    orderId={order.orderId}
+                    customerId={order.customerId}
+                    totalAmount={order.totalAmount}
+                    clickHandler={showProductsModal}
+                />
             )
         });
         setOrdersCards(ordersList);
@@ -126,6 +118,26 @@ const MyOrdersCard = () => {
         setProducts(list);
     };
 
+    const handleClose = () => {
+        setShowProductModal(false);
+    };
+
+    const productsModal = (
+        <Modal show={showProductModal} onHide={handleClose} size="m" backdrop='static' centered='true' scrollable='true'>
+            <Modal.Header closeButton>
+                <Modal.Title>Products details</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+
+                <CheckoutProductModalCard />
+
+            </Modal.Body>
+            <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>Close</Button>
+            </Modal.Footer>
+        </Modal>
+    );
+
     return (
         <div className="card m-1 w-100 border-black">
             <div className="card-body">
@@ -138,6 +150,8 @@ const MyOrdersCard = () => {
                 </div>
 
             </div>
+
+            {showProductModal && productsModal}
         </div>
     );
 };

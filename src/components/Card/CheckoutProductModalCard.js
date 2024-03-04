@@ -28,7 +28,6 @@ const CheckoutProductModalCard = (props) => {
 
     return (
         <div className="card m-1" key={id}>
-            <div className="row g-0">
                 <div className="row g-0">
                     <div className="row g-0">
                         <div className="col-4 col-lg-2">
@@ -62,7 +61,6 @@ const CheckoutProductModalCard = (props) => {
                         </div>
                     </div>
                 </div>
-            </div>
         </div>
     );
 };
