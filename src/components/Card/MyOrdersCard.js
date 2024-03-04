@@ -2,18 +2,30 @@ import React, { useEffect, useState } from "react";
 
 import MyOrdersProductCard from "./MyOrdersProductCard";
 
-const AddressBookCard = () => {
+const MyOrdersCard = () => {
 
     const [idList, setIdList] = useState([]);
     const [products, setProducts] = useState([]);
+    const [orders, setOrders] = useState([]);
+    const [ordersCards, setOrdersCards] = useState([]);
+    const [productsCards, setProductsCards] = useState([]);
 
     useEffect(() => {
         fetchOrdersData();
     }, []);
 
     useEffect(() => {
+        setOrdersDetails(orders);
+        console.log("[LOG][MyOrdersCard][useEffect] orders:", orders);
+    }, [orders]);
+
+    useEffect(() => {
         fetchProductDataById(idList);
+        console.log("[LOG][MyOrdersCard][useEffect] idList:", idList);
     }, [idList]);
+
+    useEffect(() => {
+    }, [ordersCards]);
 
     function fetchOrdersData() {
         fetch('http://localhost:8080/react/v1/orders',
@@ -23,7 +35,8 @@ const AddressBookCard = () => {
             })
             .then((res) => res.json())
             .then((data) => {
-                setIdList(getOrderIds(data));
+                setOrders(data);
+                //setIdList(getOrderIds(data));
             })
             .catch((err) => {
                 console.log(err.message);
@@ -45,19 +58,59 @@ const AddressBookCard = () => {
             .then((data) => {
                 console.log(data);
                 setProductList(data);
+                console.log("[LOG][MyOrdersCard][fetchProductDataById] data:", data);
             })
             .catch((err) => {
                 console.log(err.message);
             });
-    }
+    };
 
-    function getOrderIds(order) {
+    function getProductsByIds(products) {
         var idList = [];
-        order.forEach(product => {
-            idList.push(product.idProduct);
-        });
-
+        products.forEach(product => {
+            idList.push(product.purchasedProduct)
+        }
+        );
         return idList;
+    };
+
+    function setOrdersDetails(orders) {
+        console.log("[LOG][MyOrdersCard][setOrdersDetails] orders:", orders);
+        var ordersList = [];
+        var productsList = [];
+        orders.forEach(order => {
+            ordersList.push(
+                <div className="card p-0">
+                    <div className="row g-0">
+                        <div className="row g-0">
+                            <div className="row g-0">
+                                <div className="col-8 col-lg-10">
+                                    <div className="card-body">
+                                        <div className="d-flex flex-column d-sm-flex flex-sm-row">
+                                            <div className="col-lg-8 col-sm-6 me-2">
+                                                <h5 className="card-title">Order id: {order.orderId}</h5>
+                                                <p className="card-text p-0 m-0">Customer id: {order.customerId}</p>
+                                                <p className="card-text p-0 m-0">Address: Night City</p>
+                                            </div>
+                                        </div>
+                                        <div className="flex-row">
+                                            Products
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="flex-row">
+                                <div className="card-footer">
+                                    <p className="card-text text-end fw-bolder">Order total: {order.totalAmount}€</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )
+        });
+        setOrdersCards(ordersList);
+        //console.log("[LOG][MyOrdersCard][setOrdersDetails] ordersList:", ordersList);
     };
 
     const setProductList = (orderItems) => {
@@ -86,6 +139,7 @@ const AddressBookCard = () => {
 
                 <div className="row justify-content-center">
                     {products}
+                    {ordersCards}
                 </div>
 
             </div>
@@ -93,4 +147,4 @@ const AddressBookCard = () => {
     );
 };
 
-export default AddressBookCard;
+export default MyOrdersCard;

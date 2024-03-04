@@ -23,6 +23,7 @@ const AccountPage = () => {
 
     const [tabs, setTabs] = useState([isInfo, isOrders, isBook, isWishlist, isPassword]);
     const [component, setComponent] = useState(components.AccountInfoCard);
+    const [error, setError] = useState();
 
     var tempTabs = [isInfo, isOrders, isBook, isWishlist, isPassword];
 
@@ -36,6 +37,30 @@ const AccountPage = () => {
         setTabs(tempTabs);
     };
 
+    const getOrders = () => {
+
+        fetch('http://localhost:8080/react/v1/orders',
+            {
+                method: 'GET',
+                mode: 'cors',
+                headers: {
+                    'Accept': 'application/json, text/plain',
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then((res) => {
+                if (!res.ok) throw new Error('Failed to process order.');
+                return res.json();
+            })
+            .then((data) => {
+                console.log("[LOG][AccountPage][getOrders] data:", data);
+            })
+            .catch((err) => {
+                console.log("[LOG][AccountPage][getOrders] error:", err.message);
+                setError(err);
+            });
+    };
+
     const setTabActive = (tabName) => {
         switch (tabName) {
             case "Account information":
@@ -45,6 +70,7 @@ const AccountPage = () => {
             case "My orders":
                 toggleActiveTab(1);
                 setComponent(components.MyOrdersCard);
+                getOrders();
                 break;
             case "Address book":
                 toggleActiveTab(2);
