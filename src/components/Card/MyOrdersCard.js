@@ -77,32 +77,27 @@ const MyOrdersCard = () => {
     function setOrdersDetails(orders) {
         console.log("[LOG][MyOrdersCard][setOrdersDetails] orders:", orders);
         var ordersList = [];
-        var productsList = [];
         orders.forEach(order => {
             ordersList.push(
-                <div className="card p-0">
+                <div className="card p-0" style={{ maxWidth: '18rem' }}>
                     <div className="row g-0">
                         <div className="row g-0">
-                            <div className="row g-0">
-                                <div className="col-8 col-lg-10">
-                                    <div className="card-body">
-                                        <div className="d-flex flex-column d-sm-flex flex-sm-row">
-                                            <div className="col-lg-8 col-sm-6 me-2">
-                                                <h5 className="card-title">Order id: {order.orderId}</h5>
-                                                <p className="card-text p-0 m-0">Customer id: {order.customerId}</p>
-                                                <p className="card-text p-0 m-0">Address: Night City</p>
-                                            </div>
+                            <div className="col-8 col-lg-10">
+                                <div className="card-body">
+                                        <div className="col">
+                                            <h5 className="card-title">Order id: {order.orderId}</h5>
+                                            <p className="card-text p-0 m-0">Customer id: {order.customerId}</p>
+                                            <p className="card-text p-0 m-0">Address: Night City</p>
                                         </div>
-                                        <div className="flex-row">
-                                            Products
-                                        </div>
+                                    <div className="flex-row">
+                                        Products
                                     </div>
                                 </div>
                             </div>
-                            <div className="flex-row">
-                                <div className="card-footer">
-                                    <p className="card-text text-end fw-bolder">Order total: {order.totalAmount}€</p>
-                                </div>
+                        </div>
+                        <div className="flex-row">
+                            <div className="card-footer">
+                                <p className="card-text text-end fw-bolder">Order total: {order.totalAmount}€</p>
                             </div>
                         </div>
                     </div>

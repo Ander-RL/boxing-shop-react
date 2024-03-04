@@ -8,8 +8,8 @@ function RootPage() {
     return (
         <Fragment>
 
+            <Navbar />
             <div className='d-flex flex-column min-vh-100 overflow-auto'>
-                <Navbar />
 
                 <Outlet />
 
