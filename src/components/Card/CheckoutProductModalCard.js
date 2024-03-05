@@ -1,30 +1,8 @@
 import React from "react";
 
-import { useDispatch } from 'react-redux';
-
-import { cartActions } from "../../store/cart-slice";
-
 const CheckoutProductModalCard = (props) => {
 
-    const dispatch = useDispatch();
-
-    const { id, title, price, totalPrice, img, description, quantity } = props;
-
-    const addToCartHandler = () => {
-        dispatch(cartActions.addItemToCart({
-            id: id,
-            price: Number(price),
-            quantity: 1,
-            totalPrice: Number(price),
-            name: title,
-            img: img,
-            description: description
-        }));
-    };
-
-    const removeFromCartHandler = () => {
-        dispatch(cartActions.removeItemFromCart(id));
-    };
+    const { id, title, totalPrice, img, description, quantity } = props;
 
     return (
         <div className="card m-1" key={id}>

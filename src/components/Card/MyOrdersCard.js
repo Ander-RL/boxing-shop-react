@@ -11,7 +11,6 @@ const MyOrdersCard = () => {
     const [products, setProducts] = useState([]);
     const [orders, setOrders] = useState([]);
     const [ordersCards, setOrdersCards] = useState([]);
-    const [productsCards, setProductsCards] = useState([]);
     const [showProductModal, setShowProductModal] = useState(false);
 
     useEffect(() => {
@@ -20,13 +19,11 @@ const MyOrdersCard = () => {
 
     useEffect(() => {
         setOrdersDetails(orders);
-        console.log("[LOG][MyOrdersCard][useEffect] orders:", orders);
     }, [orders]);
 
     useEffect(() => {
-        fetchProductDataById(idList);
-        console.log("[LOG][MyOrdersCard][useEffect] idList:", idList);
-    }, [idList]);
+        if (products.length !== 0) showProductsModal();
+    }, [products]);
 
     useEffect(() => {
     }, [ordersCards]);
@@ -40,14 +37,14 @@ const MyOrdersCard = () => {
             .then((res) => res.json())
             .then((data) => {
                 setOrders(data);
-                //setIdList(getOrderIds(data));
+                console.log("[LOG][MyOrdersCard][fetchOrdersData] orders:", data);
             })
             .catch((err) => {
                 console.log(err.message);
             });
     };
 
-    function fetchProductDataById(productsId) {
+    function fetchProductDataById(productsId, order) {
         fetch('http://localhost:8080/react/v1/products/selectedProductsById',
             {
                 method: 'POST',
@@ -61,7 +58,7 @@ const MyOrdersCard = () => {
             .then((res) => res.json())
             .then((data) => {
                 console.log(data);
-                setProductList(data);
+                setProductList(data, order);
                 console.log("[LOG][MyOrdersCard][fetchProductDataById] data:", data);
             })
             .catch((err) => {
@@ -69,7 +66,7 @@ const MyOrdersCard = () => {
             });
     };
 
-    function getProductsByIds(products) {
+    function getProductsIds(products) {
         var idList = [];
         products.forEach(product => {
             idList.push(product.purchasedProduct)
@@ -78,12 +75,15 @@ const MyOrdersCard = () => {
         return idList;
     };
 
+    function getOrderProducts(order) {
+        fetchProductDataById(getProductsIds(order.products), order);
+    }
+
     function showProductsModal() {
         setShowProductModal(true);
     }
 
     function setOrdersDetails(orders) {
-        console.log("[LOG][MyOrdersCard][setOrdersDetails] orders:", orders);
         var ordersList = [];
         orders.forEach(order => {
             ordersList.push(
@@ -92,34 +92,40 @@ const MyOrdersCard = () => {
                     orderId={order.orderId}
                     customerId={order.customerId}
                     totalAmount={order.totalAmount}
-                    clickHandler={showProductsModal}
+                    clickHandler={() => getOrderProducts(order)}
                 />
             )
         });
         setOrdersCards(ordersList);
-        //console.log("[LOG][MyOrdersCard][setOrdersDetails] ordersList:", ordersList);
     };
 
-    const setProductList = (orderItems) => {
+    const setProductList = (orderItems, order) => {
         let list = [];
-        console.log(orderItems);
-        orderItems.forEach(item => list.push(
-            <MyOrdersProductCard
-                key={item.id}
-                id={item.id}
-                img={`/img/${item.img}`}
-                title={item.name}
-                description={item.description}
-                price={item.price}
-                quantity={item.quantity}
-            />
-        ));
+        var index = 0;
+        orderItems.forEach(item => {
+            var quantity = order.products[index].quantity;
+            var fullPrice = item.unitaryAmount * quantity;
+            console.log("ITEM", item, index);
+            list.push(
+                <CheckoutProductModalCard
+                    id={item.id}
+                    img={`/img/${item.img}`}
+                    title={item.name}
+                    description={item.description}
+                    quantity={quantity}
+                    totalPrice={fullPrice}
+                />
+            )
+            index++;
+        }
+        );
 
         setProducts(list);
     };
 
     const handleClose = () => {
         setShowProductModal(false);
+        setProducts([]);
     };
 
     const productsModal = (
@@ -129,7 +135,7 @@ const MyOrdersCard = () => {
             </Modal.Header>
             <Modal.Body>
 
-                <CheckoutProductModalCard />
+                {products}
 
             </Modal.Body>
             <Modal.Footer>
@@ -145,7 +151,6 @@ const MyOrdersCard = () => {
                 <hr className="bg-dark border-2 border-top border-black" />
 
                 <div className="row justify-content-center">
-                    {products}
                     {ordersCards}
                 </div>
 
