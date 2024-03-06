@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { Modal, Button } from 'react-bootstrap';
+
+import { cartActions } from "../store/cart-slice";
 
 import Container from "../components/UI/Container";
 import CheckoutProductCard from "../components/Card/CheckoutProductCard";
@@ -8,6 +11,8 @@ import CheckoutProductModalCard from "../components/Card/CheckoutProductModalCar
 
 
 const CheckoutPage = () => {
+
+    const dispatch = useDispatch();
 
     const cartItems = useSelector(state => state.cart.items);
     const cartTotal = useSelector(state => state.cart.totalAmount);
@@ -27,6 +32,10 @@ const CheckoutPage = () => {
         totalAmount: 0
     });
     const [products, setProducts] = useState([]);
+
+    const clearCart = () => {
+        dispatch(cartActions.clearCart());
+    };
 
 
     const shippingMethodHandler = (e) => {
@@ -103,7 +112,7 @@ const CheckoutPage = () => {
         cartItems.forEach((product, index) => {
             list.push(
                 <CheckoutProductModalCard
-                    key={product.id}
+                    key={index}
                     id={product.id}
                     title={product.name}
                     img={product.img}
@@ -124,6 +133,7 @@ const CheckoutPage = () => {
     useEffect(() => {
         if (response.customerId !== 0 && products.length !== 0) {
             setIsOrderConfirmed(true);
+            clearCart();
         } else {
             setIsOrderConfirmed(false);
         }

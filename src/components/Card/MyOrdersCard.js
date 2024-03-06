@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Modal, Button } from 'react-bootstrap';
+import { useNavigate } from "react-router-dom";
 
-import MyOrdersProductCard from "./MyOrdersProductCard";
 import OrderCard from "./OrderCard";
 import CheckoutProductModalCard from "./CheckoutProductModalCard";
 
 const MyOrdersCard = () => {
 
-    const [idList, setIdList] = useState([]);
+    let navigate = useNavigate(); 
+
     const [products, setProducts] = useState([]);
     const [orders, setOrders] = useState([]);
     const [ordersCards, setOrdersCards] = useState([]);
@@ -126,6 +127,7 @@ const MyOrdersCard = () => {
     const handleClose = () => {
         setShowProductModal(false);
         setProducts([]);
+        navigate("/account");
     };
 
     const productsModal = (
