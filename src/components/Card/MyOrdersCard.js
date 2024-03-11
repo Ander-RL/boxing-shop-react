@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Modal, Button } from 'react-bootstrap';
-import { useNavigate } from "react-router-dom";
 
 import OrderCard from "./OrderCard";
 import CheckoutProductModalCard from "./CheckoutProductModalCard";
 
 const MyOrdersCard = () => {
-
-    let navigate = useNavigate(); 
 
     const [products, setProducts] = useState([]);
     const [orders, setOrders] = useState([]);
@@ -127,7 +124,6 @@ const MyOrdersCard = () => {
     const handleClose = () => {
         setShowProductModal(false);
         setProducts([]);
-        navigate("/account");
     };
 
     const productsModal = (
@@ -159,6 +155,7 @@ const MyOrdersCard = () => {
             </div>
 
             {showProductModal && productsModal}
+
         </div>
     );
 };

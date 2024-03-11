@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { Modal, Button } from 'react-bootstrap';
+import { useNavigate } from "react-router-dom";
 
 import { cartActions } from "../store/cart-slice";
 
@@ -11,6 +12,8 @@ import CheckoutProductModalCard from "../components/Card/CheckoutProductModalCar
 
 
 const CheckoutPage = () => {
+
+    const navigate = useNavigate();
 
     const dispatch = useDispatch();
 
@@ -145,6 +148,7 @@ const CheckoutPage = () => {
         setIsOrderConfirmed(false);
         setIsOrderSent(false);
         setOrderFailed(false);
+        navigate("/account");
     };
 
     const orderReadyModal = (
