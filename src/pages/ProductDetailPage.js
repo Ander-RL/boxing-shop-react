@@ -53,38 +53,35 @@ export function ProductDetailPage() {
       quantity: 1,
       totalPrice: Number(productData.unitaryAmount),
       name: productData.name,
-      img: productData.img,
+      img: `/img/${productData.img}`,
       description: productData.description
     }));
   };
 
   return (
-    <div className="row bg-primary">
-      <div className="col-sm-8 bg-warning">
+    <div className="row m-0">
+      <div className="col-sm-8">
 
-        <div class="row row-cols-2 m-1">
-          <div className="col p-0">
-            <img src={`/img/${productData.img}`} className="img-fluid" alt="..." />
-            </div>
-          <div className="col p-0">
-            <img src={`/img/${productData.img}`} className="img-fluid" alt="..." />
-            </div>
-          <div className="col p-0">
-            <img src={`/img/${productData.img}`} className="img-fluid" alt="..." />
-            </div>
-          <div className="col p-0">
-            <img src={`/img/${productData.img}`} className="img-fluid" alt="..." />
-            </div>
+        <div className="row m-1">
+          <div className="col-6 p-0">
+            <img src={`/img/${productData.img}`} className="img-fluid" alt="..." style={{borderRadius: "10px 0px 0px 0px"}} />
+            <img src={`/img/${productData.img}`} className="img-fluid" alt="..." style={{borderRadius: "0px 0px 0px 10px"}} />
+
+          </div>
+          <div className="col-6 p-0">
+            <img src={`/img/${productData.img}`} className="img-fluid" alt="..." style={{borderRadius: "0px 10px 0px 0px"}} />
+            <img src={`/img/${productData.img}`} className="img-fluid" alt="..." style={{borderRadius: "0px 0px 10px 0px"}} />
+          </div>
         </div>
 
       </div>
       <div className="col-sm-4">
 
-        <div className="card m-1">
+        <div className="card m-1 shadow-sm">
           <h3 className="card-header">{productData.name}</h3>
           <div className="card-body">
             <h5 className="card-title">{productData.description}</h5>
-            <p className="card-text">Price: {productData.unitaryAmount}</p>
+            <p className="card-text m-0">Price: {productData.unitaryAmount}€</p>
             <p className="card-text">Stock: {productData.quantity}</p>
             <button onClick={addToCartHandler} className="btn btn-outline-dark btn-sm mt-auto">
               <i className="bi bi-cart2"></i>
