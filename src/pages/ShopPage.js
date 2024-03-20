@@ -178,6 +178,14 @@ const ShopPage = () => {
     setPaginationButtons(buttons);
   }
 
+  const pageHandler = (step) => {
+    if (step === "previous") {
+      currentPage !== 0 && setCurrentPage(currentPage - 1);
+    } else {
+      currentPage < (totalPages - 1) && setCurrentPage(currentPage + 1);
+    }
+  }
+
   function fetchProductData(products) {
     fetch(`http://localhost:8080/react/v1/products/selectedProducts?page=${currentPage}&size=${5}`,
       {
@@ -245,13 +253,13 @@ const ShopPage = () => {
           <nav aria-label="Page">
             <ul className="pagination">
               <li className="page-item">
-                <a className="page-link text-dark" href="#" aria-label="Previous">
+                <a className="page-link text-dark" href="#" aria-label="Previous" onClick={() => pageHandler("previous")}>
                   <span aria-hidden="true">&laquo;</span>
                 </a>
               </li>
               {paginationButtons.length !== 0 && paginationButtons}
               <li className="page-item">
-                <a className="page-link text-dark" href="#" aria-label="Next">
+                <a className="page-link text-dark" href="#" aria-label="Next" onClick={() => pageHandler("next")}>
                   <span aria-hidden="true">&raquo;</span>
                 </a>
               </li>
