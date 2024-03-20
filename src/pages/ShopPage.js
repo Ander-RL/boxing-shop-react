@@ -1,5 +1,7 @@
 import React, { Fragment, useEffect, useState, useRef } from "react";
 
+import './ShopPage.css';
+
 import Container from "../components/UI/Container";
 import ProductCardList from "../assets/items/ProductCardItems";
 import ProductCard from "../components/Card/ProductCard";
@@ -13,8 +15,12 @@ const ShopPage = () => {
 
   const [items, setItems] = useState(ProductCardList);
   const [visibleProducts, setVisibleProducts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+  const [paginationButtons, setPaginationButtons] = useState([]);
 
   const renderCount = useRef(0);
+
   useEffect(() => {
     renderCount.current = renderCount.current + 1;
     console.log("[LOG][ShopPage][Render Count] ", renderCount);
@@ -39,6 +45,10 @@ const ShopPage = () => {
   useEffect(() => {
     fetchProductData(allProducts);
   }, []);
+
+  useEffect(() => {
+    fetchProductData(allProducts);
+  }, [currentPage]);
 
   useEffect(() => {
     setItems(visibleProducts);
@@ -154,8 +164,22 @@ const ShopPage = () => {
     fetchProductData(selectedProducts);
   };
 
+  const pageSelectorHandler = (selectedPage) => {
+    setCurrentPage(selectedPage);
+  };
+
+  const createPaginationButtons = (totalPages) => {
+    var buttons = []
+    for (let i = 0; i < totalPages; i++) {
+      buttons.push(
+        <li className="page-item" key={i}><a className="page-link text-dark" href="#" onClick={() => pageSelectorHandler(i)}>{i + 1}</a></li>
+      );
+    }
+    setPaginationButtons(buttons);
+  }
+
   function fetchProductData(products) {
-    fetch('http://localhost:8080/react/v1/products/selectedProducts',
+    fetch(`http://localhost:8080/react/v1/products/selectedProducts?page=${currentPage}&size=${5}`,
       {
         method: 'POST',
         mode: 'cors',
@@ -167,7 +191,10 @@ const ShopPage = () => {
       })
       .then((res) => res.json())
       .then((data) => {
-        setProductList(data);
+        setCurrentPage(data.pageable.pageNumber);
+        setTotalPages(data.totalPages);
+        setProductList(data.content);
+        createPaginationButtons(data.totalPages);
       })
       .catch((err) => {
         console.log(err.message);
@@ -213,8 +240,27 @@ const ShopPage = () => {
         <div className="row align-items-center justify-content-center">
           {items}
         </div>
+
+        <div className="d-flex justify-content-center align-items-center mt-3">
+          <nav aria-label="Page">
+            <ul className="pagination">
+              <li className="page-item">
+                <a className="page-link text-dark" href="#" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+              {paginationButtons.length !== 0 && paginationButtons}
+              <li className="page-item">
+                <a className="page-link text-dark" href="#" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+
       </Container>
-    </Fragment>
+    </Fragment >
   );
 };
 
