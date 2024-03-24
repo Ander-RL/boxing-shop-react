@@ -276,7 +276,7 @@ const ShopPage = () => {
 
           <div className="d-flex flex-row justify-content-center mb-4">
             <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+              <button class="btn dropdown-toggle bg-white text-dark" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                 {numberElements}
               </button>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
