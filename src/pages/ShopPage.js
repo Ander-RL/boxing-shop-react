@@ -18,6 +18,7 @@ const ShopPage = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [paginationButtons, setPaginationButtons] = useState([]);
+  const [numberElements, setNumberElements] = useState(5);
 
   const renderCount = useRef(0);
 
@@ -48,7 +49,7 @@ const ShopPage = () => {
 
   useEffect(() => {
     fetchProductData(allProducts);
-  }, [currentPage]);
+  }, [currentPage, numberElements]);
 
   useEffect(() => {
     setItems(visibleProducts);
@@ -186,8 +187,12 @@ const ShopPage = () => {
     }
   }
 
+  function showNumberOfElements(numberOfElements) {
+    setNumberElements(numberOfElements);
+  };
+
   function fetchProductData(products) {
-    fetch(`http://localhost:8080/react/v1/products/selectedProducts?page=${currentPage}&size=${5}`,
+    fetch(`http://localhost:8080/react/v1/products/selectedProducts?page=${currentPage}&size=${numberElements}`,
       {
         method: 'POST',
         mode: 'cors',
@@ -249,22 +254,39 @@ const ShopPage = () => {
           {items}
         </div>
 
-        <div className="d-flex justify-content-center align-items-center mt-3">
-          <nav aria-label="Page">
-            <ul className="pagination">
-              <li className="page-item">
-                <a className="page-link text-dark" href="#" aria-label="Previous" onClick={() => pageHandler("previous")}>
-                  <span aria-hidden="true">&laquo;</span>
-                </a>
-              </li>
-              {paginationButtons.length !== 0 && paginationButtons}
-              <li className="page-item">
-                <a className="page-link text-dark" href="#" aria-label="Next" onClick={() => pageHandler("next")}>
-                  <span aria-hidden="true">&raquo;</span>
-                </a>
-              </li>
-            </ul>
-          </nav>
+        <div className="d-flex row justify-content-center align-items-center mt-3">
+
+          <div className="d-flex flex-row justify-content-center">
+            <nav aria-label="Page">
+              <ul className="pagination">
+                <li className="page-item">
+                  <a className="page-link text-dark" href="#" aria-label="Previous" onClick={() => pageHandler("previous")}>
+                    <span aria-hidden="true">&laquo;</span>
+                  </a>
+                </li>
+                {paginationButtons.length !== 0 && paginationButtons}
+                <li className="page-item">
+                  <a className="page-link text-dark" href="#" aria-label="Next" onClick={() => pageHandler("next")}>
+                    <span aria-hidden="true">&raquo;</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+
+          <div className="d-flex flex-row justify-content-center mb-4">
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                {numberElements}
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" onClick={() => showNumberOfElements(5)}>5</a></li>
+                <li><a class="dropdown-item" onClick={() => showNumberOfElements(10)}>10</a></li>
+                <li><a class="dropdown-item" onClick={() => showNumberOfElements(20)}>20</a></li>
+              </ul>
+            </div>
+          </div>
+
         </div>
 
       </Container>
@@ -273,7 +295,6 @@ const ShopPage = () => {
 };
 
 export default ShopPage;
-
 
 function toggleFilter(currentButtonClass) {
   if (currentButtonClass.classList.contains('text-muted')) {
